@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credvert — Smart Credit Card Advisor & Zero‑Knowledge Vault</title>
+  <meta name="description" content="The right card, every checkout. Maximize cashback, miles and milestone rewards with on-device DPDP-compliant SMS tracking and hardware-encrypted vault.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/premium.css">
+</head>
+<body>
+
+  <!-- ░░ AMBIENT MESH ░░ -->
+  <div class="ambient-mesh" aria-hidden="true">
+    <div class="ambient-orb orb-gold"></div>
+    <div class="ambient-orb orb-sapphire"></div>
+    <div class="ambient-orb orb-emerald"></div>
+  </div>
+
+  <!-- ░░ ANNOUNCEMENT BAR ░░ -->
+  <div class="announcement-bar">
+    <span class="announcement-pill">Credvert 2.0</span>
+    <span style="color:var(--txt-70);">Zero-Knowledge SMS Intelligence · DPDP Act 2023 Compliant · India's Smartest Card Advisor</span>
+    <a href="#sms-intelligence" class="announcement-link">
+      Explore →
+    </a>
+  </div>
+
+  <!-- ░░ STICKY HEADER ░░ -->
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-wrap">
+        <a href="#" class="brand-logo">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4H3V6h18v2zm0 10H3v-6h18v6z"/></svg>
+          </div>
+          <div class="brand-name">
+            Credvert
+            <span class="sub">Card Intelligence</span>
+          </div>
+        </a>
+
+        <ul class="nav-menu">
+          <li><a href="#advisor"          class="nav-link">Smart Advisor</a></li>
+          <li><a href="#sms-intelligence" class="nav-link">SMS Intelligence</a></li>
+          <li><a href="#calculator"       class="nav-link">ROI Calculator</a></li>
+          <li><a href="#catalog"          class="nav-link">Card Catalog</a></li>
+          <li><a href="#security"         class="nav-link">Security</a></li>
+          <li><a href="#faq"              class="nav-link">FAQ</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle theme"></button>
+          <a href="#advisor" class="btn btn-secondary btn-sm">Try Demo</a>
+          <button class="btn btn-primary btn-sm download-trigger-btn">Get App</button>
+          <button class="mobile-toggle" id="mobileMenuToggle" aria-label="Menu">☰</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  HERO                              ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <section class="hero-section" id="home">
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- LEFT: Copy -->
+        <div class="hero-content">
+          <div class="hero-badge reveal">
+            <span class="live-dot"></span>
+            Live Advisor · Powered by Credvert AI
+          </div>
+
+          <h1 class="hero-title reveal reveal-delay-1">
+            Never Leave<br>
+            <span class="grad-word">Reward Points</span><br>
+            On The Table.
+          </h1>
+
+          <p class="hero-subtitle reveal reveal-delay-2">
+            Credvert reads every swipe in real-time and tells you exactly which card
+            unlocks the <strong>highest cashback, airline miles, or milestone perks</strong>
+            — with zero-knowledge security by design.
+          </p>
+
+          <div class="hero-actions reveal reveal-delay-3">
+            <a href="#advisor" class="btn btn-primary btn-xl">
+              Experience Live Advisor
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <button class="btn btn-secondary btn-xl download-trigger-btn">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><polyline points="8 12 12 16 16 12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>
+              Download App
+            </button>
+          </div>
+
+          <div class="hero-stats reveal reveal-delay-4">
+            <div class="stat-item">
+              <span class="stat-val" data-counter data-prefix="₹" data-target="8.4" data-suffix="Cr+">₹8.4Cr+</span>
+              <span class="stat-lbl">Rewards Unlocked</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-val" data-counter data-target="45000" data-suffix="+">45,000+</span>
+              <span class="stat-lbl">Active Cardholders</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-val emerald">100%</span>
+              <span class="stat-lbl">On-Device Privacy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Interactive 3D Card Stage -->
+        <div class="hero-stage">
+          <div class="card-stage-container">
+
+            <!-- Glow Halo -->
+            <div class="card-glow-bg" data-parallax="0.15"></div>
+
+            <!-- Floating Intelligence Pill 1 -->
+            <div class="hero-floating-pill pill-1" id="heroPill1">
+              <div class="pill-icon-wrap">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div class="pill-content">
+                <span class="pill-label" id="heroPill1Title">5X SmartBuy Reward</span>
+                <span class="pill-sublabel" id="heroPill1Sub">+₹1,650 on this booking</span>
+              </div>
+            </div>
+
+            <!-- Floating Intelligence Pill 2 -->
+            <div class="hero-floating-pill pill-2">
+              <div class="pill-icon-wrap">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div class="pill-content">
+                <span class="pill-label">Bill Due in 8 Days</span>
+                <span class="pill-sublabel">₹41,850 · 12% Utilization</span>
+              </div>
+            </div>
+
+            <!-- ── The Credit Card ── -->
+            <div class="visual-card-wrapper" id="heroCardWrapper" title="Hover to tilt · Click to flip">
+              <!-- Holographic Sheen Layer -->
+              <div class="card-sheen" id="cardSheen"></div>
+
+              <!-- FRONT -->
+              <div class="card-face front skin-aurum" id="heroCardFront">
+                <div class="card-top">
+                  <div class="card-bank">
+                    <div class="card-bank-name">
+                      <span id="heroCardBank">HDFC BANK</span>
+                      <span class="card-metal-tag" id="heroCardMetalTag">METAL</span>
+                    </div>
+                  </div>
+                  <div class="contactless-icon">
+                    <svg width="20" height="20" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.8" viewBox="0 0 24 24">
+                      <path d="M9 12a3 3 0 0 1 0-4.24"/><path d="M6.17 14.83A7 7 0 0 1 6.17 5"/><path d="M12 12a5 5 0 0 1 0-7.07"/></svg>
+                  </div>
+                </div>
+
+                <div class="card-mid">
+                  <div class="emv-chip">
+                    <div class="chip-notch"></div>
+                  </div>
+                </div>
+
+                <div class="card-bottom">
+                  <div>
+                    <div class="card-pan" id="heroCardPan">•••• •••• •••• 9842</div>
+                    <div style="display:flex; gap:2rem;">
+                      <div class="card-info-col">
+                        <span class="card-info-label">Cardholder</span>
+                        <span class="card-info-val">JAY CHAUHAN</span>
+                      </div>
+                      <div class="card-info-col">
+                        <span class="card-info-label">Expires</span>
+                        <span class="card-info-val">10/29</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-network-logo">
+                    <img src="assets/network-logo/visa.svg" id="heroCardNetworkLogo" alt="Visa">
+                  </div>
+                </div>
+              </div>
+
+              <!-- BACK -->
+              <div class="card-face back skin-aurum">
+                <div class="magnetic-strip"></div>
+                <div class="card-back-body">
+                  <div class="sig-cvv-row">
+                    <div class="signature-strip">Jay Chauhan</div>
+                    <div class="cvv-panel" id="heroCardCvv">•••</div>
+                  </div>
+                  <p class="back-disclaimer">
+                    Authorised signature required. Full PAN and CVV stored exclusively in device hardware Secure Enclave. Zero cloud sync per RBI & India DPDP Act 2023.
+                  </p>
+                  <div class="back-helpline">
+                    <span>24×7 Concierge: 1800 266 3333</span>
+                    <span>CID: 8492</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ── / Credit Card ── -->
+
+            <!-- Card Controls -->
+            <div class="card-controls">
+              <button class="btn btn-secondary btn-sm" id="flipCardBtn">Flip to Back</button>
+              <button class="btn btn-secondary btn-sm" id="revealNumberBtn">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                Reveal
+              </button>
+              <button class="btn btn-secondary btn-sm" id="copyCardBtn">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+
+            <!-- Card Switcher -->
+            <div class="card-switcher-dock">
+              <button class="card-pill-btn active" data-index="0">Infinia Metal</button>
+              <button class="card-pill-btn" data-index="1">SBI Cashback</button>
+              <button class="card-pill-btn" data-index="2">Axis Atlas</button>
+              <button class="card-pill-btn" data-index="3">Amex Plat</button>
+              <button class="card-pill-btn" data-index="4">ICICI Emeralde</button>
+              <button class="card-pill-btn" data-index="5">IDFC Wealth</button>
+              <button class="card-pill-btn" data-index="6">Tata Neu</button>
+            </div>
+          </div>
+        </div>
+        <!-- / hero right -->
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  ADVISOR SIMULATOR                ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <section class="section" id="advisor">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-tag">Instant Optimization</div>
+        <h2 class="section-title">Which Card Should You Swipe Right Now?</h2>
+        <p class="section-desc">
+          Select your spend category, set the amount, and watch the advisor rank every card in your wallet
+          by exact reward rate — accounting for portal bonuses, quarterly caps, and forex taxes.
+        </p>
+      </div>
+
+      <div class="advisor-card reveal reveal-scale">
+        <div class="advisor-grid">
+
+          <!-- Controls -->
+          <div>
+            <div class="step-label"><span class="step-number">1</span> Choose Category</div>
+            <div class="category-chips" id="categoryChips">
+              <div class="category-chip active" data-category="dining">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                <span>Dining</span>
+              </div>
+              <div class="category-chip" data-category="flights">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+                <span>Flights</span>
+              </div>
+              <div class="category-chip" data-category="hotels">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 3h12a2 2 0 0 1 2 2v2H4V5a2 2 0 0 1 2-2z"/></svg>
+                <span>Hotels</span>
+              </div>
+              <div class="category-chip" data-category="online_shopping">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <span>Shopping</span>
+              </div>
+              <div class="category-chip" data-category="groceries">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                <span>Groceries</span>
+              </div>
+              <div class="category-chip" data-category="fuel">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="22" x2="15" y2="22"/><line x1="4" y1="9" x2="14" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/></svg>
+                <span>Fuel</span>
+              </div>
+              <div class="category-chip" data-category="utilities">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <span>Utilities</span>
+              </div>
+              <div class="category-chip" data-category="subscriptions">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                <span>Streaming</span>
+              </div>
+              <div class="category-chip" data-category="rent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Rent</span>
+              </div>
+            </div>
+
+            <div class="spend-control-wrap">
+              <div class="step-label"><span class="step-number">2</span> Monthly Spend Amount</div>
+              <div class="spend-header">
+                <span class="spend-amount-display" id="advisorSpendDisplay">₹15,000</span>
+                <span style="font-size:0.75rem; color:var(--txt-50);">Per Transaction</span>
+              </div>
+              <input type="range" class="range-slider-visible" id="advisorSpendSlider" min="500" max="250000" step="500" value="15000" style="width:100%; margin-bottom:0.85rem;">
+              <div class="preset-buttons">
+                <button class="preset-btn" data-amount="3500">₹3.5k</button>
+                <button class="preset-btn" data-amount="15000">₹15k</button>
+                <button class="preset-btn" data-amount="45000">₹45k</button>
+                <button class="preset-btn" data-amount="120000">₹1.2L</button>
+                <button class="preset-btn" data-amount="250000">₹2.5L</button>
+              </div>
+            </div>
+
+            <div class="step-label"><span class="step-number">3</span> International Payment?</div>
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <div class="toggle-title">Paying Abroad / Foreign Currency</div>
+                <div class="toggle-sub">Deducts forex markup + 18% GST from net return</div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="advisorIntlToggle">
+                <span class="slider-round"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div class="advisor-results-pane">
+            <div class="winner-crown-badge">
+              <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Best Card To Swipe
+            </div>
+
+            <div class="winner-header">
+              <div class="winner-thumb skin-aurum" id="advWinnerThumb">Infinia</div>
+              <div class="winner-info">
+                <h4 id="advWinnerName">HDFC Infinia Metal</h4>
+                <p id="advWinnerBank">HDFC Bank · Visa Infinite</p>
+              </div>
+            </div>
+
+            <div class="earnings-box">
+              <div>
+                <div class="earn-stat-value" id="advEarnVal">₹2,490</div>
+                <div class="earn-stat-label">Net Reward Value</div>
+              </div>
+              <div>
+                <div class="earn-stat-value gold-text" id="advEarnRate">16.6%</div>
+                <div class="earn-stat-label">Effective Return</div>
+              </div>
+            </div>
+
+            <div class="reason-callout" id="advWhyItWins">
+              5X SmartBuy accelerated rate yields 16.6% value in 1:1 reward points for flights & hotels.
+            </div>
+
+            <div class="runners-section">
+              <div class="runners-title">Alternatives Ranked</div>
+              <div id="advRunnersList"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  SMS INTELLIGENCE                  ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <section class="section section-alt" id="sms-intelligence">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-tag" style="color:var(--emerald);">DPDP 2023 Compliant</div>
+        <h2 class="section-title">Zero-Knowledge SMS Spend Intelligence</h2>
+        <p class="section-desc">
+          Unlike every legacy finance app, Credvert parses bank alerts
+          <strong>100% locally in device RAM</strong> — raw SMS text and full card PANs
+          are strictly forbidden from ever leaving your phone.
+        </p>
+      </div>
+
+      <div class="sms-sandbox-card reveal reveal-scale">
+        <div class="sms-grid">
+          <!-- Input -->
+          <div>
+            <div class="step-label"><span class="step-number">1</span> Pick a Sample Bank Alert</div>
+            <div class="sms-sample-picker">
+              <button class="sms-sample-btn active" data-sample="sample-1">
+                <span>HDFC Dining Alert · Zomato ₹3,450</span>
+                <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--txt-50);">VM-HDFCBK</span>
+              </button>
+              <button class="sms-sample-btn" data-sample="sample-2">
+                <span>SBI Shopping Alert · Amazon ₹14,999</span>
+                <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--txt-50);">AD-SBICRD</span>
+              </button>
+              <button class="sms-sample-btn" data-sample="sample-3">
+                <span>Axis Travel · MakeMyTrip ₹28,400</span>
+                <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--txt-50);">BP-AXISBK</span>
+              </button>
+              <button class="sms-sample-btn" data-sample="sample-4">
+                <span>ICICI International · Apple Store $99</span>
+                <span style="font-family:var(--font-mono); font-size:0.72rem; color:var(--txt-50);">VK-ICICIB</span>
+              </button>
+            </div>
+
+            <div class="step-label"><span class="step-number">2</span> Live SMS Text (Local RAM Only)</div>
+            <textarea class="sms-textarea" id="smsInputText" placeholder="Paste any bank credit card SMS alert..."></textarea>
+
+            <button class="sms-parse-btn" id="smsParseBtn">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Run On-Device Parser
+            </button>
+          </div>
+
+          <!-- Terminal Output -->
+          <div>
+            <div class="terminal-card">
+              <div class="terminal-header">
+                <div class="terminal-dots">
+                  <div class="t-dot red"></div>
+                  <div class="t-dot yellow"></div>
+                  <div class="t-dot green"></div>
+                </div>
+                <div class="terminal-title-bar">device_enclave_parser.dart</div>
+                <div class="terminal-status">LIVE</div>
+              </div>
+              <div class="terminal-body">
+                <div class="t-line"><span class="t-key">Bank Entity:</span>    <span class="t-val" id="termBank">HDFC Bank</span></div>
+                <div class="t-line"><span class="t-key">Card Suffix:</span>    <span class="t-val" id="termCard">ending in 9842</span></div>
+                <div class="t-line"><span class="t-key">Amount:</span>         <span class="t-val emerald" id="termAmount">₹3,450.00</span></div>
+                <div class="t-line"><span class="t-key">Merchant:</span>       <span class="t-val" id="termMerchant">ZOMATO</span></div>
+                <div class="t-line"><span class="t-key">Category:</span>       <span class="t-val" id="termCategory">DINING</span></div>
+                <div class="t-line"><span class="t-key">Reward Accrual:</span> <span class="t-val emerald" id="termRewards">+₹573 (16.6%)</span></div>
+                <div class="t-line"><span class="t-key">Parse Time:</span>     <span class="t-val" id="termDuration">0.018 ms · Local RAM</span></div>
+                <div class="t-line"><span class="t-key">SHA-256 Hash:</span>   <span class="t-val muted" id="termHash">e3b0c44298fc1c14...</span></div>
+                <div class="privacy-row">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  DPDP 2023: Raw SMS &amp; full PAN never transmitted
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  ROI CALCULATOR                    ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <section class="section" id="calculator">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-tag">Annual ROI Simulator</div>
+        <h2 class="section-title">Calculate Your Annual Credit Card Profit</h2>
+        <p class="section-desc">
+          Dial in your monthly category spends. The simulator projects annual cashback,
+          milestone vouchers, lounge access savings, and fee waiver thresholds in real-time.
+        </p>
+      </div>
+
+      <div class="calc-card reveal reveal-scale">
+        <div class="calc-grid">
+          <!-- Sliders -->
+          <div>
+            <div class="step-label" style="margin-bottom:1.5rem;"><span class="step-number">1</span> Set Your Monthly Spends</div>
+            <div class="spend-sliders-grid">
+              <div class="cat-slider-box">
+                <div class="cat-slider-head">
+                  <span class="cat-title">Online Shopping</span>
+                  <span class="cat-amount" id="val_online_shopping">₹15,000</span>
+                </div>
+                <input type="range" class="range-slider-visible" id="calcShoppingSlider" min="0" max="100000" step="1000" value="15000">
+              </div>
+              <div class="cat-slider-box">
+                <div class="cat-slider-head">
+                  <span class="cat-title">Dining & Delivery</span>
+                  <span class="cat-amount" id="val_dining">₹8,000</span>
+                </div>
+                <input type="range" class="range-slider-visible" id="calcDiningSlider" min="0" max="60000" step="1000" value="8000">
+              </div>
+              <div class="cat-slider-box">
+                <div class="cat-slider-head">
+                  <span class="cat-title">Flights & Travel</span>
+                  <span class="cat-amount" id="val_flights">₹12,000</span>
+                </div>
+                <input type="range" class="range-slider-visible" id="calcFlightsSlider" min="0" max="150000" step="2000" value="12000">
+              </div>
+              <div class="cat-slider-box">
+                <div class="cat-slider-head">
+                  <span class="cat-title">Groceries</span>
+                  <span class="cat-amount" id="val_groceries">₹10,000</span>
+                </div>
+                <input type="range" class="range-slider-visible" id="calcGroceriesSlider" min="0" max="50000" step="1000" value="10000">
+              </div>
+              <div class="cat-slider-box">
+                <div class="cat-slider-head">
+                  <span class="cat-title">Fuel</span>
+                  <span class="cat-amount" id="val_fuel">₹4,000</span>
+                </div>
+                <input type="range" class="range-slider-visible" id="calcFuelSlider" min="0" max="30000" step="1000" value="4000">
+              </div>
+              <div class="cat-slider-box">
+                <div class="cat-slider-head">
+                  <span class="cat-title">Utility Bills</span>
+                  <span class="cat-amount" id="val_utilities">₹6,000</span>
+                </div>
+                <input type="range" class="range-slider-visible" id="calcUtilitiesSlider" min="0" max="40000" step="1000" value="6000">
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div class="calc-summary-panel">
+            <div class="net-gain-display">
+              <div class="step-label" style="justify-content:center; margin-bottom:0.5rem;">Estimated Annual Net Gain</div>
+              <div class="net-gain-number" id="calcNetGainVal">₹58,420</div>
+              <div style="font-size:0.82rem; color:var(--txt-50); margin-top:0.35rem;">After fees · Including milestone bonuses</div>
+            </div>
+
+            <div style="margin-bottom:1.5rem;">
+              <div style="font-weight:700; font-size:0.95rem; margin-bottom:0.25rem;" id="calcTopCardName">HDFC Infinia Metal</div>
+              <div style="font-size:0.78rem; color:var(--emerald-light); font-weight:600;" id="calcFeeStatus">Annual fee 100% waived</div>
+            </div>
+
+            <div class="step-label" style="margin-bottom:0.85rem;">Perks Unlocked</div>
+            <ul class="perks-list" id="calcPerksList"></ul>
+
+            <button class="btn btn-primary btn-sm download-trigger-btn" style="width:100%;">
+              Add Card to Credvert Vault →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  CARD CATALOG                      ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <section class="section section-alt" id="catalog">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-tag">Card Database</div>
+        <h2 class="section-title">Explore India's Top Credit Cards</h2>
+        <p class="section-desc">
+          Real reward structures, lounge rules, fee waiver thresholds, and forex rates — side by side.
+          Select up to 3 cards to compare in a full matrix.
+        </p>
+      </div>
+
+      <div class="catalog-toolbar reveal">
+        <div class="catalog-tabs">
+          <button class="tab-btn active" data-filter="all">All Cards</button>
+          <button class="tab-btn" data-filter="cashback">Cashback</button>
+          <button class="tab-btn" data-filter="travel">Travel & Miles</button>
+          <button class="tab-btn" data-filter="metal">Metal</button>
+          <button class="tab-btn" data-filter="free">Lifetime Free</button>
+        </div>
+        <div class="catalog-search-wrap">
+          <svg class="catalog-search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="catalog-search-input" id="catalogSearchInput" placeholder="Search by card or bank…">
+        </div>
+      </div>
+
+      <div class="cards-grid" id="catalogCardsGrid" data-stagger="true" data-stagger-delay="0.08">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Fixed Compare Dock -->
+  <div class="compare-dock" id="compareDock">
+    <span style="font-size:0.82rem; font-weight:700; color:var(--txt-70);">Compare:</span>
+    <div class="compare-dock-cards" id="dockCardsList"></div>
+    <button class="btn btn-primary btn-sm" id="launchCompareModalBtn">Compare Matrix →</button>
+  </div>
+
+  <!-- Compare Modal -->
+  <div class="modal-overlay" id="compareModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeCompareModalBtn">✕</button>
+      <h3 style="font-family:var(--font-display); font-size:1.8rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:0.5rem;">Card Comparison</h3>
+      <p style="font-size:0.88rem; color:var(--txt-70); margin-bottom:2rem;">Detailed fee, reward, forex, and lounge breakdown.</p>
+      <div id="modalComparisonContent"></div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  OFFERS                             ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <section class="section" id="offers">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-tag">Live Deals</div>
+        <h2 class="section-title">Exclusive Cardholder Perks</h2>
+        <p class="section-desc">Credvert curates verified discount codes and merchant offers updated daily.</p>
+      </div>
+
+      <div class="offers-grid" data-stagger="true" data-stagger-delay="0.1">
+        <div class="offer-card">
+          <span class="offer-tag">Swiggy / Zomato</span>
+          <div class="offer-title">20% Instant Discount on Gourmet Dining</div>
+          <p class="offer-desc">Valid on HDFC Infinia & Diners Black. Max ₹1,000 discount per bill at partner restaurants.</p>
+          <div class="coupon-box">
+            <span class="coupon-code">INFINIADINE</span>
+            <button class="copy-btn" data-code="INFINIADINE">COPY</button>
+          </div>
+        </div>
+        <div class="offer-card">
+          <span class="offer-tag">Amazon India</span>
+          <div class="offer-title">Flat 5% Direct Statement Cashback</div>
+          <p class="offer-desc">SBI Cashback Card. Auto-credited to statement within 2 days — no coupon required, no merchant restriction.</p>
+          <div class="coupon-box">
+            <span class="coupon-code">AUTO CREDIT</span>
+            <button class="copy-btn" data-code="AUTO-CREDIT">AUTO</button>
+          </div>
+        </div>
+        <div class="offer-card">
+          <span class="offer-tag">MakeMyTrip</span>
+          <div class="offer-title">5X EDGE Miles + 1:2 KrisFlyer Transfer</div>
+          <p class="offer-desc">Axis Atlas Card. Convert EDGE Miles directly to Singapore Airlines KrisFlyer or Accor ALL at 1:2 ratio.</p>
+          <div class="coupon-box">
+            <span class="coupon-code">ATLASTICKETS</span>
+            <button class="copy-btn" data-code="ATLASTICKETS">COPY</button>
+          </div>
+        </div>
+        <div class="offer-card">
+          <span class="offer-tag">BookMyShow</span>
+          <div class="offer-title">Buy 1 Get 1 Free Ticket up to ₹750</div>
+          <p class="offer-desc">ICICI Emeralde Private Metal. Valid twice per calendar month, on weekends. No additional code required.</p>
+          <div class="coupon-box">
+            <span class="coupon-code">ICICIBOGO</span>
+            <button class="copy-btn" data-code="ICICIBOGO">COPY</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  SECURITY                           ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <section class="section section-alt" id="security">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-tag" style="color:var(--emerald);">Zero-Knowledge</div>
+        <h2 class="section-title">Security Architecture That Never Compromises</h2>
+        <p class="section-desc">Your financial data is protected at every layer — from hardware chip to Indian law.</p>
+      </div>
+
+      <div class="security-grid" data-stagger="true" data-stagger-delay="0.15">
+        <div class="security-card">
+          <div class="security-icon-wrap sec-gold">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Secure Enclave & Keystore</h3>
+          <p>Card numbers and CVVs are encrypted inside your phone's dedicated hardware security chip (Apple Secure Enclave / Android Keystore). Decryption requires local biometric authentication and never touches any network.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-icon-wrap sec-emerald">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>India DPDP Act 2023 Compliant</h3>
+          <p>Full compliance with India's Digital Personal Data Protection Act. Raw SMS bodies are strictly forbidden from leaving your device. Only anonymized SHA-256 dedupe hashes are synced for duplicate prevention.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-icon-wrap sec-sapphire">
+            <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </div>
+          <h3>One-Tap Right to Erasure</h3>
+          <p>You own your data unconditionally. Tap <em>Delete Account</em> in-app or use our <a href="deletion.html" style="color:var(--gold);">online deletion portal</a> to permanently erase all records within 24 hours — guaranteed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  FAQ                               ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-tag">Help Center</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-grid reveal">
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How does Credvert pick the best card for my purchase?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">Credvert maintains a real-time catalog of reward multiplier rules including SmartBuy portals (5X–10X), category exclusions (fuel, rent), monthly spend caps, and point redemption values. When you enter a spend, the algorithm calculates precise net financial return — including 18% GST deduction on foreign exchange markup if you're paying abroad.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Is granting SMS permission safe?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">Yes — Credvert runs an isolated Dart regex parser directly inside your phone's RAM. Full 16-digit card numbers, OTPs, and raw SMS text bodies are strictly discarded by design. Only anonymized spend metadata (amount, merchant, card suffix) is used to compute analytics. No SMS content ever reaches any server.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How does foreign exchange markup calculation work?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">Most Indian banks charge between 2.0% and 3.5% forex markup, plus 18% GST on that fee (e.g., 3.5% × 1.18 = 4.13% effective total). Credvert deducts this exact amount from your reward rate, so you see true net return. For a card like ICICI Emeralde (1.5% markup = 1.77% effective), international spending is actually profitable over standard cards.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What about iOS? Apple doesn't allow SMS reading.</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">On iOS, Credvert provides a one-tap clipboard paste parser. Copy a bank alert and tap "Parse Clipboard" — the parsing still happens 100% on your device with the same zero-knowledge guarantees. You can also log spends manually with the same category intelligence.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Can I delete my account and all data permanently?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer">Yes, unconditionally. Under the DPDP Act 2023, GDPR and CCPA you have an absolute Right to Erasure. Go to <em>Account → Delete Account</em> in-app, or use our <a href="deletion.html">online deletion portal</a>. All records, cards, and anonymized hashes are permanently purged within 24 hours.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  CTA                               ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2>The Right Card.<br>Every Checkout.</h2>
+        <p>Join 45,000+ smart cardholders maximising every swipe with Credvert's intelligence engine.</p>
+        <div class="cta-btns">
+          <button class="btn btn-primary btn-xl download-trigger-btn">
+            Get Credvert App
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+          <a href="#advisor" class="btn btn-secondary btn-xl">Try Online Simulator</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <!-- ░░  FOOTER                            ░░ -->
+  <!-- ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="brand-logo" style="display:inline-flex; margin-bottom:0;">
+            <div class="brand-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4H3V6h18v2zm0 10H3v-6h18v6z"/></svg>
+            </div>
+            <div class="brand-name">Credvert<span class="sub">Card Intelligence</span></div>
+          </a>
+          <p class="footer-brand-text">
+            The intelligent credit card advisor and zero-knowledge hardware vault. Engineered for Indian cardholders to maximize miles, points, and cashback on every purchase.
+          </p>
+          <div class="footer-contact">
+            <strong style="color:var(--txt-100);">Jay Chauhan</strong><br>
+            <a href="mailto:support@credvert.app">support@credvert.app</a><br>
+            <a href="mailto:grievance@credvert.app">grievance@credvert.app</a><br>
+            Ahmedabad, Gujarat, India
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#advisor">Smart Advisor</a></li>
+            <li><a href="#sms-intelligence">SMS Intelligence</a></li>
+            <li><a href="#calculator">ROI Calculator</a></li>
+            <li><a href="#catalog">Card Catalog</a></li>
+            <li><a href="#offers">Exclusive Offers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Open Source</h4>
+          <ul>
+            <li><a href="https://github.com/Jay3Chauhan/CreditVance" target="_blank" rel="noopener">Flutter Frontend</a></li>
+            <li><a href="https://github.com/Jay3Chauhan/CreditVance-Backend" target="_blank" rel="noopener">FastAPI Backend</a></li>
+            <li><a href="https://github.com/Jay3Chauhan/CreditVance-Backend/blob/main/docs/API_REFERENCE.md" target="_blank" rel="noopener">API Reference</a></li>
+            <li><a href="https://github.com/Jay3Chauhan/CreditVance-Backend/blob/main/docs/FRONTEND_GUIDE.md" target="_blank" rel="noopener">Frontend Guide</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Legal & DPDP</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="deletion.html">Data Deletion Rights</a></li>
+            <li><a href="mailto:grievance@credvert.app">Grievance Redressal</a></li>
+            <li><span style="font-size:0.72rem; color:var(--emerald); font-weight:600;">✓ DPDP Act 2023 Compliant</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Credvert by Jay Chauhan. All rights reserved. Zero-Knowledge Credit Card Intelligence.</span>
+        <div class="footer-legal-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="deletion.html">Data Deletion</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Download Modal -->
+  <div class="modal-overlay" id="downloadModal">
+    <div class="modal-content" style="max-width:500px; text-align:center;">
+      <button class="modal-close" id="closeDownloadModalBtn">✕</button>
+      <div class="brand-icon" style="margin:0 auto 1.5rem; width:52px; height:52px;">
+        <svg viewBox="0 0 24 24"><path d="M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4H3V6h18v2zm0 10H3v-6h18v6z"/></svg>
+      </div>
+      <h3 style="font-family:var(--font-display); font-size:1.8rem; font-weight:800; letter-spacing:-0.03em; margin-bottom:0.6rem;">Download Credvert</h3>
+      <p style="color:var(--txt-70); margin-bottom:1.75rem; font-size:0.92rem;">Scan QR code or visit GitHub for APK and TestFlight links.</p>
+
+      <!-- SVG QR Placeholder -->
+      <div style="background:#fff; padding:1.25rem; border-radius:16px; display:inline-block; margin-bottom:1.5rem; box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+        <svg width="180" height="180" viewBox="0 0 200 200">
+          <rect width="200" height="200" fill="#fff"/>
+          <rect x="20" y="20" width="50" height="50" fill="#0A0B0E"/>
+          <rect x="27" y="27" width="36" height="36" fill="#fff"/>
+          <rect x="35" y="35" width="20" height="20" fill="#0A0B0E"/>
+          <rect x="130" y="20" width="50" height="50" fill="#0A0B0E"/>
+          <rect x="137" y="27" width="36" height="36" fill="#fff"/>
+          <rect x="145" y="35" width="20" height="20" fill="#0A0B0E"/>
+          <rect x="20" y="130" width="50" height="50" fill="#0A0B0E"/>
+          <rect x="27" y="137" width="36" height="36" fill="#fff"/>
+          <rect x="35" y="145" width="20" height="20" fill="#0A0B0E"/>
+          <rect x="82" y="82" width="36" height="36" rx="6" fill="#D4A853"/>
+          <path d="M92 92h16v4H92zm0 8h16v8H92z" fill="#0A0B0E"/>
+          <rect x="80" y="20" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="96" y="20" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="112" y="20" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="80" y="36" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="144" y="88" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="160" y="88" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="144" y="104" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="80" y="144" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="96" y="160" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="144" y="144" width="8" height="8" fill="#0A0B0E"/>
+          <rect x="160" y="160" width="8" height="8" fill="#0A0B0E"/>
+        </svg>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+        <a href="https://github.com/Jay3Chauhan/CreditVance" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Android / Source Code</a>
+        <a href="https://github.com/Jay3Chauhan/CreditVance" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">iOS TestFlight</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts: data engines first, then interactions, then app orchestrator -->
+  <script src="js/cards-data.js"></script>
+  <script src="js/advisor-engine.js"></script>
+  <script src="js/sms-engine.js"></script>
+  <script src="js/calculator-engine.js"></script>
+  <script src="js/interactions.js"></script>
+  <script src="js/app-v2.js"></script>
+</body>
+</html>
