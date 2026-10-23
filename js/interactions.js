@@ -443,7 +443,7 @@
   }
 
   /* ─────────────────────────────────────────────────────────────────────────
-   *  8. GRADIENT RANGE SLIDER FILL (Continuous 1:1 Feedback)
+   *  8. GRADIENT RANGE SLIDER FILL & FLOATING TOOLTIP
    * ───────────────────────────────────────────────────────────────────────── */
   function updateSliderFill(slider) {
     const min = parseFloat(slider.min) || 0;
@@ -453,11 +453,35 @@
     slider.style.background = `linear-gradient(to right, var(--gold) 0%, var(--gold) ${pct}%, var(--bg-3) ${pct}%, var(--bg-3) 100%)`;
   }
 
+  function updateSliderTooltip(slider) {
+    const wrapper = slider.closest('.range-slider-wrapper');
+    if (!wrapper) return;
+    const tooltip = wrapper.querySelector('.slider-tooltip');
+    if (!tooltip) return;
+    const min = parseFloat(slider.min) || 0;
+    const max = parseFloat(slider.max) || 100;
+    const val = parseFloat(slider.value) || 0;
+    const pct = ((val - min) / (max - min)) * 100;
+    tooltip.style.left = `${pct}%`;
+    tooltip.textContent = '₹' + Math.round(val).toLocaleString('en-IN');
+  }
+
   function initSliders() {
     document.querySelectorAll('input[type="range"]').forEach(slider => {
       updateSliderFill(slider);
+      updateSliderTooltip(slider);
+
       slider.addEventListener('input', () => {
         updateSliderFill(slider);
+        updateSliderTooltip(slider);
+      });
+
+      slider.addEventListener('pointerdown', () => {
+        slider.closest('.range-slider-wrapper')?.classList.add('active');
+      });
+
+      slider.addEventListener('pointerup', () => {
+        slider.closest('.range-slider-wrapper')?.classList.remove('active');
       });
     });
   }
@@ -525,15 +549,20 @@
         speed: parseFloat(el.getAttribute('data-parallax')) || 0.25
       });
     });
+    updateParallax();
   }
 
   let ticking = false;
   function updateParallax() {
+    const vh = window.innerHeight;
+    const vCenter = vh / 2;
     parallaxItems.forEach(({ el, speed }) => {
       const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        const center = rect.top + rect.height / 2 - window.innerHeight / 2;
-        el.style.transform = `translateY(${center * speed}px)`;
+      if (rect.top < vh && rect.bottom > 0) {
+        const elCenter = rect.top + rect.height / 2;
+        const dist = elCenter - vCenter;
+        const offset = (dist * speed).toFixed(2);
+        el.style.transform = `translate3d(0, ${offset}px, 0)`;
       }
     });
     ticking = false;
@@ -544,6 +573,10 @@
       requestAnimationFrame(updateParallax);
       ticking = true;
     }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    requestAnimationFrame(updateParallax);
   }, { passive: true });
 
   /* ─────────────────────────────────────────────────────────────────────────
@@ -678,7 +711,104 @@
   }
 
   /* ─────────────────────────────────────────────────────────────────────────
-   *  15. INIT BOOT
+   *  15. KINETIC TYPOGRAPHY & CYCLING VALUE PROPOSITION
+   * ───────────────────────────────────────────────────────────────────────── */
+  function initKineticTypography() {
+    // Split-word staggered reveal
+    const words = document.querySelectorAll('.split-word');
+    words.forEach((word, idx) => {
+      setTimeout(() => {
+        word.classList.add('in');
+      }, 120 + idx * 85);
+    });
+
+    // Live cycling value proposition pill
+    const cyclingEl = document.getElementById('heroCyclingText');
+    if (!cyclingEl) return;
+
+    const metrics = [
+      'Dining at 16.6% Net Return (HDFC Infinia Metal)',
+      'Flights & Hotels: 10X SmartBuy Accelerated Points',
+      'Direct 5% Statement Cashback on Amazon & Flipkart (SBI)',
+      'Axis Atlas: 1:2 KrisFlyer & Accor ALL Milestone Transfers',
+      'Zero-Knowledge: 100% On-Device DPDP 2023 Hardware Enclave'
+    ];
+
+    let currentIdx = 0;
+    setInterval(() => {
+      cyclingEl.classList.remove('fade-in');
+      cyclingEl.classList.add('fade-out');
+      setTimeout(() => {
+        currentIdx = (currentIdx + 1) % metrics.length;
+        cyclingEl.textContent = metrics[currentIdx];
+        cyclingEl.classList.remove('fade-out');
+        cyclingEl.classList.add('fade-in');
+      }, 250);
+    }, 3500);
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   *  16. COLLAPSIBLE ACCORDIONS & DRAWERS (Apple Fluid Physics)
+   * ───────────────────────────────────────────────────────────────────────── */
+  function initCollapsibles() {
+    // Advisor Calculation Math Drawer
+    const advMathToggle = document.getElementById('advMathToggle');
+    const advMathDrawer = document.getElementById('advMathDrawer');
+    if (advMathToggle && advMathDrawer) {
+      advMathToggle.addEventListener('click', () => {
+        SoundFX.playClick();
+        const isExpanded = advMathDrawer.classList.contains('expanded');
+        advMathDrawer.classList.toggle('expanded', !isExpanded);
+        advMathToggle.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+      });
+    }
+
+    // Catalog Card Collapsible Drawers (Event delegation on catalogGrid)
+    const catalogGrid = document.getElementById('catalogCardsGrid');
+    if (catalogGrid) {
+      catalogGrid.addEventListener('click', (e) => {
+        const toggleBtn = e.target.closest('.card-drawer-toggle');
+        if (!toggleBtn) return;
+        SoundFX.playClick();
+        const drawerWrap = toggleBtn.nextElementSibling;
+        if (!drawerWrap) return;
+        const isExpanded = drawerWrap.classList.contains('expanded');
+        drawerWrap.classList.toggle('expanded', !isExpanded);
+        toggleBtn.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+      });
+    }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   *  17. MORPHING COPY BUTTONS
+   * ───────────────────────────────────────────────────────────────────────── */
+  function initCopyButtons() {
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const code = btn.getAttribute('data-code') || btn.textContent.trim();
+        if (!code) return;
+
+        navigator.clipboard.writeText(code).then(() => {
+          const origHtml = btn.innerHTML;
+          btn.classList.add('copied');
+          btn.innerHTML = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> COPIED`;
+          SoundFX.playChime();
+          window.showToast && window.showToast(`✓ Copied coupon: ${code}`, 'success');
+
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = origHtml;
+          }, 2200);
+        }).catch(() => {
+          window.showToast && window.showToast(`Code: ${code}`, 'info');
+        });
+      });
+    });
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   *  18. INIT BOOT
    * ───────────────────────────────────────────────────────────────────────── */
   function init() {
     initTheme();
@@ -696,6 +826,9 @@
     initSmoothScroll();
     initMobileMenu();
     initFAQ();
+    initKineticTypography();
+    initCollapsibles();
+    initCopyButtons();
     setTimeout(initMagneticButtons, 200);
   }
 

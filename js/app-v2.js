@@ -225,6 +225,35 @@
     if (advEarnRate)   advEarnRate.textContent     = (top.netReturnPercent || top.effectiveEarnRatePercent || 0).toFixed(1) + '%';
     if (advWhyItWins)  advWhyItWins.textContent    = top.whyItWins || result.insights?.[0]?.body || 'Highest effective return rate for this category.';
 
+    // Populate Collapsible Calculation Math Breakdown
+    const advMathBody = document.getElementById('advMathBody');
+    if (advMathBody) {
+      advMathBody.innerHTML = `
+        <div class="math-calc-card">
+          <div class="math-calc-row">
+            <span>Spend Principal:</span>
+            <span>₹${advisorState.spend.toLocaleString('en-IN')}</span>
+          </div>
+          <div class="math-calc-row">
+            <span>Reward Rule (${top.rateData?.note || 'Standard'}):</span>
+            <span>${top.effectiveEarnRatePercent}% (×${top.rateData?.multiplier || 1})</span>
+          </div>
+          <div class="math-calc-row">
+            <span>Gross Reward Accrual:</span>
+            <span>+₹${top.grossValueInr.toLocaleString('en-IN')} (${top.pointsEarned ? top.pointsEarned.toLocaleString('en-IN') + ' pts' : 'Cashback'})</span>
+          </div>
+          ${advisorState.international ? `
+          <div class="math-calc-row" style="color:var(--rose);">
+            <span>Forex Markup (${card.forexMarkup}% + 18% GST = ${top.forexMarkupApplied}%):</span>
+            <span>-₹${top.forexFeeInr.toLocaleString('en-IN')}</span>
+          </div>` : ''}
+          <div class="math-calc-row total">
+            <span>Net Realized Yield:</span>
+            <span>₹${top.netValueInr.toLocaleString('en-IN')} (${top.netReturnPercent}%)</span>
+          </div>
+        </div>`;
+    }
+
     // Runners
     if (advRunnersList && result.runnersUp) {
       advRunnersList.innerHTML = result.runnersUp.slice(0, 4).map(r => {
@@ -510,6 +539,48 @@
         </div>
 
         <p class="card-overview">${card.overview || ''}</p>
+
+        <!-- Collapsible Perks & Rules Drawer -->
+        <div class="card-collapsible-drawer">
+          <button class="card-drawer-toggle" type="button" aria-expanded="false">
+            <span>View Perks, Lounges & Rules</span>
+            <svg class="drawer-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="card-drawer-content-wrap">
+            <div class="card-drawer-inner">
+              <div class="drawer-section">
+                <div class="drawer-heading">
+                  <svg width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  Lounge Privileges
+                </div>
+                <div class="drawer-text">
+                  <strong>Domestic:</strong> ${card.lounges?.domestic || 'None included'}<br>
+                  <strong>International:</strong> ${card.lounges?.international || 'None included'}
+                </div>
+              </div>
+
+              <div class="drawer-section">
+                <div class="drawer-heading">
+                  <svg width="14" height="14" fill="none" stroke="var(--emerald)" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  Milestones & Waiver
+                </div>
+                <ul class="drawer-list">
+                  ${(card.milestones || []).slice(0, 3).map(m => `<li>${m}</li>`).join('')}
+                </ul>
+              </div>
+
+              <div class="drawer-section">
+                <div class="drawer-heading">
+                  <svg width="14" height="14" fill="none" stroke="var(--sapphire)" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  Forex Cost Assessment
+                </div>
+                <div class="drawer-text">
+                  Bank markup: <strong>${card.forexMarkup}%</strong> (+ 18% GST = <strong>${(card.forexMarkup * 1.18).toFixed(2)}%</strong> net deduction).
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="card-actions-row">
           <a href="${card.applyUrl || '#'}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Apply Now</a>
