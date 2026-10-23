@@ -1,8 +1,10 @@
 /**
- * Credvert App Orchestrator v2.0
- * Wires all interactive UI sections to the data engines.
- * interactions.js owns: theme, FAQ, smooth scroll, mobile menu, 3D tilt, flip, scroll reveals, counters, toast
- * This file owns: card switcher, advisor, SMS, calculator, catalog, compare, modals, coupons
+ * Credvert App Orchestrator v2.5 — Apple Design & Interaction Polish Edition
+ * Wires all interactive UI sections to the underlying financial engines.
+ * interactions.js owns: SoundFX, theme, 3D card spring physics, segmented gliders,
+ * accordion, scroll reveals, parallax, toast notifications.
+ * This file owns: card switcher & biometric scan, advisor simulation, on-device SMS parser,
+ * ROI calculator, catalog rendering, multi-card comparison matrix, modals & perks.
  */
 
 (function () {
@@ -11,9 +13,9 @@
   /* ─────────────────────────────────────────────
    *  ENGINES
    * ───────────────────────────────────────────── */
-  const advisorEngine   = new AdvisorEngine(CREDVERT_CARDS);
-  const smsEngine       = new SmsSpendEngine(CREDVERT_CARDS);
-  const calcEngine      = new AnnualSpendCalculator(CREDVERT_CARDS);
+  const advisorEngine = new AdvisorEngine(CREDVERT_CARDS);
+  const smsEngine     = new SmsSpendEngine(CREDVERT_CARDS);
+  const calcEngine    = new AnnualSpendCalculator(CREDVERT_CARDS);
 
   /* ─────────────────────────────────────────────
    *  SKIN → NETWORK MAP
@@ -28,36 +30,37 @@
     amethyst:  'assets/network-logo/Mastercard.svg'
   };
 
-  /* ─────────────────────────────────────────────
-   *  HERO CARD SWITCHER
-   * ───────────────────────────────────────────── */
-  const heroCardFront   = document.getElementById('heroCardFront');
-  const heroCardBack    = document.querySelector('.card-face.back');
-  const heroCardBank    = document.getElementById('heroCardBank');
-  const heroCardMetalTag= document.getElementById('heroCardMetalTag');
-  const heroCardPan     = document.getElementById('heroCardPan');
-  const heroCardNetwork = document.getElementById('heroCardNetworkLogo');
-  const heroPill1Title  = document.getElementById('heroPill1Title');
-  const heroPill1Sub    = document.getElementById('heroPill1Sub');
-  const revealBtn       = document.getElementById('revealNumberBtn');
-  const copyCardBtn     = document.getElementById('copyCardBtn');
-
-  let currentCardIndex  = 0;
-  let panRevealed       = false;
-
-  const PILL_DATA = [
-    { title: '5X SmartBuy Reward',        sub: '+₹1,650 on this booking' },
-    { title: '5% Direct Cashback',         sub: '+₹750 auto-credited' },
-    { title: '5X EDGE Miles',              sub: '+2,840 miles credited' },
-    { title: 'Airport Lounge Access',      sub: 'Priority Pass · Global' },
-    { title: 'BookMyShow BOGO',            sub: 'Save ₹750 tonight' },
-    { title: 'Unlimited Railway Lounges',  sub: '+500 reward points' },
-    { title: 'NeuCoins 5% on Tata',        sub: '+₹5,000 Neu points' }
-  ];
-
   const ALL_SKINS = ['aurum','emerald','sapphire','titanium','obsidian','rosso','amethyst'];
 
-  function selectHeroCard(idx) {
+  /* ─────────────────────────────────────────────
+   *  HERO CARD STAGE & SWITCHER
+   * ───────────────────────────────────────────── */
+  const heroCardFront    = document.getElementById('heroCardFront');
+  const heroCardBack     = document.querySelector('.card-face.back');
+  const heroCardBank     = document.getElementById('heroCardBank');
+  const heroCardMetalTag = document.getElementById('heroCardMetalTag');
+  const heroCardPan      = document.getElementById('heroCardPan');
+  const heroCardNetwork  = document.getElementById('heroCardNetworkLogo');
+  const heroPill1Title   = document.getElementById('heroPill1Title');
+  const heroPill1Sub     = document.getElementById('heroPill1Sub');
+  const revealBtn        = document.getElementById('revealNumberBtn');
+  const copyCardBtn      = document.getElementById('copyCardBtn');
+
+  let currentCardIndex = 0;
+  let panRevealed      = false;
+  let scrambleTimer    = null;
+
+  const PILL_DATA = [
+    { title: '5X SmartBuy Reward',       sub: '+₹1,650 on this booking' },
+    { title: '5% Direct Cashback',        sub: '+₹750 auto-credited' },
+    { title: '5X EDGE Miles',             sub: '+2,840 miles credited' },
+    { title: 'Airport Lounge Access',     sub: 'Priority Pass · Global' },
+    { title: 'BookMyShow BOGO',           sub: 'Save ₹750 tonight' },
+    { title: 'Unlimited Railway Lounges', sub: '+500 reward points' },
+    { title: 'NeuCoins 5% on Tata',       sub: '+₹5,000 Neu points' }
+  ];
+
+  function selectHeroCard(idx, isUserClick = false) {
     if (!CREDVERT_CARDS[idx]) return;
     currentCardIndex = idx;
     panRevealed = false;
@@ -65,20 +68,25 @@
     const card = CREDVERT_CARDS[idx];
     const skin = card.skin;
 
+    // Reset unlocked or scanning states
+    if (heroCardFront) heroCardFront.classList.remove('unlocked', 'scanning');
+
     // Update skin on both faces
     ALL_SKINS.forEach(s => {
-      heroCardFront.classList.remove('skin-' + s);
+      heroCardFront && heroCardFront.classList.remove('skin-' + s);
       if (heroCardBack) heroCardBack.classList.remove('skin-' + s);
     });
-    heroCardFront.classList.add('skin-' + skin);
+    heroCardFront && heroCardFront.classList.add('skin-' + skin);
     if (heroCardBack) heroCardBack.classList.add('skin-' + skin);
 
-    // Update content
-    heroCardBank.textContent = card.bank.toUpperCase();
-    heroCardMetalTag.style.display = card.metal ? '' : 'none';
-    heroCardPan.textContent = `•••• •••• •••• ${card.last4}`;
-    heroCardNetwork.src = card.networkLogo || SKIN_MAP[skin] || 'assets/network-logo/visa.svg';
-    heroCardNetwork.alt = card.network || 'Network';
+    // Update card data
+    if (heroCardBank) heroCardBank.textContent = card.bank.toUpperCase();
+    if (heroCardMetalTag) heroCardMetalTag.style.display = card.metal ? '' : 'none';
+    if (heroCardPan) heroCardPan.textContent = `•••• •••• •••• ${card.last4}`;
+    if (heroCardNetwork) {
+      heroCardNetwork.src = card.networkLogo || SKIN_MAP[skin] || 'assets/network-logo/visa.svg';
+      heroCardNetwork.alt = card.network || 'Network';
+    }
 
     // Update floating pill
     const p = PILL_DATA[idx] || PILL_DATA[0];
@@ -95,38 +103,72 @@
       btn.classList.toggle('active', parseInt(btn.dataset.index) === idx);
     });
 
-    // Pulse animation
-    heroCardFront.style.transform = 'scale(1.03)';
-    setTimeout(() => { heroCardFront.style.transform = ''; }, 200);
+    // Update segmented control glider
+    if (window.updateHeroGlider) window.updateHeroGlider();
+
+    if (isUserClick && window.cvSound) {
+      window.cvSound.playClick();
+    }
   }
 
   // Wire switcher buttons
   document.querySelectorAll('.card-pill-btn').forEach(btn => {
-    btn.addEventListener('click', () => selectHeroCard(parseInt(btn.dataset.index)));
+    btn.addEventListener('click', () => selectHeroCard(parseInt(btn.dataset.index), true));
   });
 
-  // Reveal / Hide card number
+  // Biometric Face ID / Laser Scan Simulation (Apple Design §16 Craft & Delight)
   if (revealBtn) {
     revealBtn.addEventListener('click', () => {
       panRevealed = !panRevealed;
       const card = CREDVERT_CARDS[currentCardIndex];
+
+      if (scrambleTimer) clearInterval(scrambleTimer);
+
       if (panRevealed) {
-        heroCardPan.textContent = `4532 1894 7623 ${card.last4}`;
-        revealBtn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Hide`;
-        window.showToast && window.showToast('Biometric verified — card number revealed (demo)', 'success');
+        // Trigger hardware scan animation & audio
+        if (window.cvSound) window.cvSound.playScan();
+        if (heroCardFront) heroCardFront.classList.add('scanning');
+
+        // Scramble animation for masked digits before resolving
+        let count = 0;
+        scrambleTimer = setInterval(() => {
+          count++;
+          const r1 = Math.floor(1000 + Math.random() * 9000);
+          const r2 = Math.floor(1000 + Math.random() * 9000);
+          const r3 = Math.floor(1000 + Math.random() * 9000);
+          if (heroCardPan) heroCardPan.textContent = `${r1} ${r2} ${r3} ${card.last4}`;
+
+          if (count >= 6) {
+            clearInterval(scrambleTimer);
+            if (heroCardFront) {
+              heroCardFront.classList.remove('scanning');
+              heroCardFront.classList.add('unlocked');
+            }
+            if (heroCardPan) heroCardPan.textContent = `4532 1894 7623 ${card.last4}`;
+            revealBtn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Hide`;
+            if (window.cvSound) window.cvSound.playChime();
+            window.showToast && window.showToast('Hardware Enclave biometric verified — PAN decrypted on-device', 'success');
+          }
+        }, 45);
+
       } else {
-        heroCardPan.textContent = `•••• •••• •••• ${card.last4}`;
+        if (heroCardFront) heroCardFront.classList.remove('unlocked', 'scanning');
+        if (heroCardPan) heroCardPan.textContent = `•••• •••• •••• ${card.last4}`;
         revealBtn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Reveal`;
+        if (window.cvSound) window.cvSound.playClick();
       }
     });
   }
 
-  // Copy card number
+  // Copy card number to clipboard
   if (copyCardBtn) {
     copyCardBtn.addEventListener('click', () => {
       const card = CREDVERT_CARDS[currentCardIndex];
-      const pan = panRevealed ? `4532 1894 7623 ${card.last4}` : `•••• •••• •••• ${card.last4}`;
-      navigator.clipboard && navigator.clipboard.writeText(pan).catch(() => {});
+      const pan  = panRevealed ? `4532 1894 7623 ${card.last4}` : `•••• •••• •••• ${card.last4}`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(pan).catch(() => {});
+      }
+      if (window.cvSound) window.cvSound.playChime();
       window.showToast && window.showToast('Card number copied to clipboard', 'success');
     });
   }
@@ -208,6 +250,7 @@
   // Category chips
   document.querySelectorAll('.category-chip').forEach(chip => {
     chip.addEventListener('click', () => {
+      if (window.cvSound) window.cvSound.playClick();
       document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       advisorState.category = chip.dataset.category;
@@ -216,10 +259,18 @@
   });
 
   // Spend slider
+  let lastAudioTick = 0;
   if (spendSlider) {
     spendSlider.addEventListener('input', () => {
       advisorState.spend = parseInt(spendSlider.value);
       if (spendDisplay) spendDisplay.textContent = fmt(advisorState.spend);
+
+      // Throttled tactile sound click every 45ms during drag
+      const now = performance.now();
+      if (now - lastAudioTick > 45 && window.cvSound) {
+        window.cvSound.playClick();
+        lastAudioTick = now;
+      }
       runAdvisorSimulation();
     });
   }
@@ -227,9 +278,13 @@
   // Preset buttons
   document.querySelectorAll('.preset-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (window.cvSound) window.cvSound.playClick();
       const amount = parseInt(btn.dataset.amount);
       advisorState.spend = amount;
-      if (spendSlider) spendSlider.value = amount;
+      if (spendSlider) {
+        spendSlider.value = amount;
+        spendSlider.dispatchEvent(new Event('input'));
+      }
       if (spendDisplay) spendDisplay.textContent = fmt(amount);
       document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -240,6 +295,7 @@
   // International toggle
   if (intlToggle) {
     intlToggle.addEventListener('change', () => {
+      if (window.cvSound) window.cvSound.playClick();
       advisorState.international = intlToggle.checked;
       runAdvisorSimulation();
     });
@@ -257,6 +313,7 @@
 
   const smsInputText = document.getElementById('smsInputText');
   const smsParseBtn  = document.getElementById('smsParseBtn');
+  const termBody     = document.getElementById('termBody');
   const termBank     = document.getElementById('termBank');
   const termCard     = document.getElementById('termCard');
   const termAmount   = document.getElementById('termAmount');
@@ -268,6 +325,10 @@
 
   async function runSMSParse() {
     if (!smsInputText || !smsInputText.value.trim()) return;
+
+    if (window.cvSound) window.cvSound.playScan();
+    if (termBody) termBody.classList.add('parsing');
+
     const t0 = performance.now();
     let result;
     try {
@@ -276,29 +337,35 @@
       console.error('SMS parse error:', e);
       result = null;
     }
-    if (!result) return;
 
-    const dt = result.parseDurationMs || (performance.now() - t0).toFixed(3);
+    setTimeout(() => {
+      if (termBody) termBody.classList.remove('parsing');
+      if (!result) return;
 
-    if (termBank)     termBank.textContent     = result.bank      || 'Unknown';
-    if (termCard)     termCard.textContent     = result.cardLast4 ? `ending in ${result.cardLast4}` : '—';
-    if (termAmount)   termAmount.textContent   = result.amount    ? `₹${Number(result.amount).toLocaleString('en-IN', {minimumFractionDigits:2})}` : '—';
-    if (termMerchant) termMerchant.textContent = (result.merchant || '—').toUpperCase();
-    if (termCategory) termCategory.textContent = (result.category || '—').toUpperCase().replace(/_/g,' ');
+      const dt = result.parseDurationMs || (performance.now() - t0).toFixed(3);
 
-    // Use pre-computed reward from engine
-    let rewardStr = '—';
-    if (result.rewardEstimateInr !== undefined && result.ratePercent !== undefined) {
-      rewardStr = `+₹${result.rewardEstimateInr.toLocaleString('en-IN')} (${result.ratePercent}%)`;
-    }
-    if (termRewards)  termRewards.textContent  = rewardStr;
-    if (termDuration) termDuration.textContent = `${dt} ms · Local RAM`;
-    if (termHash)     termHash.textContent     = result.dedupeHash || 'sha256:' + Math.random().toString(16).slice(2,18) + '...';
+      if (termBank)     termBank.textContent     = result.bank      || 'Unknown';
+      if (termCard)     termCard.textContent     = result.cardLast4 ? `ending in ${result.cardLast4}` : '—';
+      if (termAmount)   termAmount.textContent   = result.amount    ? `₹${Number(result.amount).toLocaleString('en-IN', {minimumFractionDigits:2})}` : '—';
+      if (termMerchant) termMerchant.textContent = (result.merchant || '—').toUpperCase();
+      if (termCategory) termCategory.textContent = (result.category || '—').toUpperCase().replace(/_/g,' ');
+
+      let rewardStr = '—';
+      if (result.rewardEstimateInr !== undefined && result.ratePercent !== undefined) {
+        rewardStr = `+₹${result.rewardEstimateInr.toLocaleString('en-IN')} (${result.ratePercent}%)`;
+      }
+      if (termRewards)  termRewards.textContent  = rewardStr;
+      if (termDuration) termDuration.textContent = `${dt} ms · Local RAM`;
+      if (termHash)     termHash.textContent     = result.dedupeHash || 'sha256:' + Math.random().toString(16).slice(2,18) + '...';
+
+      if (window.cvSound) window.cvSound.playChime();
+    }, 240);
   }
 
   // Sample buttons
   document.querySelectorAll('.sms-sample-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (window.cvSound) window.cvSound.playClick();
       document.querySelectorAll('.sms-sample-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const sampleKey = btn.dataset.sample;
@@ -308,7 +375,9 @@
   });
 
   // Parse button
-  if (smsParseBtn) smsParseBtn.addEventListener('click', runSMSParse);
+  if (smsParseBtn) {
+    smsParseBtn.addEventListener('click', runSMSParse);
+  }
 
   /* ─────────────────────────────────────────────
    *  ROI CALCULATOR
@@ -325,7 +394,6 @@
   const calcSpends = {};
 
   function runCalculator() {
-    // Build spends object
     SLIDERS.forEach(s => {
       const el = document.getElementById(s.id);
       calcSpends[s.key] = el ? parseInt(el.value) : 0;
@@ -362,20 +430,27 @@
     }
   }
 
-  // Wire sliders
+  // Wire calculator sliders
+  let lastCalcAudio = 0;
   SLIDERS.forEach(s => {
     const slider = document.getElementById(s.id);
     const valEl  = document.getElementById(s.valId);
     if (slider) {
       slider.addEventListener('input', () => {
         if (valEl) valEl.textContent = fmt(parseInt(slider.value));
+
+        const now = performance.now();
+        if (now - lastCalcAudio > 45 && window.cvSound) {
+          window.cvSound.playClick();
+          lastCalcAudio = now;
+        }
         runCalculator();
       });
     }
   });
 
   /* ─────────────────────────────────────────────
-   *  CARD CATALOG
+   *  CARD CATALOG & COMPARISON MATRIX
    * ───────────────────────────────────────────── */
   const catalogGrid   = document.getElementById('catalogCardsGrid');
   const searchInput   = document.getElementById('catalogSearchInput');
@@ -463,7 +538,10 @@
 
     // Wire compare buttons
     catalogGrid.querySelectorAll('.compare-toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => toggleCompare(parseInt(btn.dataset.id)));
+      btn.addEventListener('click', () => {
+        if (window.cvSound) window.cvSound.playClick();
+        toggleCompare(parseInt(btn.dataset.id));
+      });
     });
 
     // Wire subtle interactive mouse tilt/sheen on catalog cards
@@ -476,11 +554,14 @@
         card.style.setProperty('--mouse-y', `${y}%`);
       });
     });
+
+    if (window.updateCatalogGlider) window.updateCatalogGlider();
   }
 
   // Filter tabs
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (window.cvSound) window.cvSound.playClick();
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeFilter = btn.dataset.filter;
@@ -488,7 +569,7 @@
     });
   });
 
-  // Search
+  // Search input
   if (searchInput) {
     searchInput.addEventListener('input', () => renderCatalog(activeFilter, searchInput.value));
   }
@@ -513,9 +594,10 @@
         return;
       }
       compareList.push(cardId);
+      if (window.cvSound) window.cvSound.playChime();
     }
     updateCompareDock();
-    renderCatalog(); // re-render to update button states
+    renderCatalog();
   }
 
   function updateCompareDock() {
@@ -535,19 +617,24 @@
           </div>` : '';
       }).join('');
       dockCardsList.querySelectorAll('.dock-remove').forEach(btn => {
-        btn.addEventListener('click', () => toggleCompare(parseInt(btn.dataset.id)));
+        btn.addEventListener('click', () => {
+          if (window.cvSound) window.cvSound.playClick();
+          toggleCompare(parseInt(btn.dataset.id));
+        });
       });
     }
   }
 
   function openModal(modal) {
     if (!modal) return;
+    if (window.cvSound) window.cvSound.playClick();
     modal.classList.add('open', 'active');
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal(modal) {
     if (!modal) return;
+    if (window.cvSound) window.cvSound.playClick();
     modal.classList.remove('open', 'active');
     document.body.style.overflow = '';
   }
@@ -619,8 +706,8 @@
   /* ─────────────────────────────────────────────
    *  DOWNLOAD MODAL
    * ───────────────────────────────────────────── */
-  const downloadModal     = document.getElementById('downloadModal');
-  const closeDownloadBtn  = document.getElementById('closeDownloadModalBtn');
+  const downloadModal    = document.getElementById('downloadModal');
+  const closeDownloadBtn = document.getElementById('closeDownloadModalBtn');
 
   document.querySelectorAll('.download-trigger-btn').forEach(btn => {
     btn.addEventListener('click', () => openModal(downloadModal));
@@ -653,8 +740,9 @@
       if (code && navigator.clipboard) {
         navigator.clipboard.writeText(code).catch(() => {});
       }
+      if (window.cvSound) window.cvSound.playChime();
       const original = btn.textContent;
-      btn.textContent = 'COPIED!';
+      btn.textContent = 'COPIED! ✓';
       btn.style.background = 'var(--emerald)';
       btn.style.color = '#fff';
       setTimeout(() => {
@@ -662,7 +750,7 @@
         btn.style.background = '';
         btn.style.color = '';
       }, 2000);
-      window.showToast && window.showToast(`Coupon "${code}" copied!`, 'success');
+      window.showToast && window.showToast(`Coupon "${code}" copied to clipboard!`, 'success');
     });
   });
 
@@ -679,15 +767,18 @@
     if (smsInputText) {
       smsInputText.value = SMS_SAMPLES['sample-1'];
     }
-    // Auto-parse after a short delay (so interactions.js scroll reveals can fire first)
+    // Auto-parse after a short delay
     setTimeout(runSMSParse, 400);
 
-    // Auto-rotate hero card every 4s
+    // Auto-rotate hero card every 4.5s
     let heroAutoIdx = 0;
     setInterval(() => {
-      heroAutoIdx = (heroAutoIdx + 1) % CREDVERT_CARDS.length;
-      selectHeroCard(heroAutoIdx);
-    }, 4000);
+      // Don't auto-rotate if user is actively tracking or PAN is revealed
+      if (!panRevealed) {
+        heroAutoIdx = (heroAutoIdx + 1) % CREDVERT_CARDS.length;
+        selectHeroCard(heroAutoIdx, false);
+      }
+    }, 4500);
   }
 
   if (document.readyState === 'loading') {
