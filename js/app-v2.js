@@ -81,6 +81,11 @@
 
     // Update card data
     if (heroCardBank) heroCardBank.textContent = card.bank.toUpperCase();
+    const heroCardBankLogo = document.getElementById('heroCardBankLogo');
+    if (heroCardBankLogo && card.bankLogo) {
+      heroCardBankLogo.src = card.bankLogo;
+      heroCardBankLogo.alt = card.bank;
+    }
     if (heroCardMetalTag) heroCardMetalTag.style.display = card.metal ? '' : 'none';
     if (heroCardPan) heroCardPan.textContent = `•••• •••• •••• ${card.last4}`;
     if (heroCardNetwork) {
@@ -501,16 +506,22 @@
     return `
       <div class="catalog-card-item" data-id="${card.id}">
         <div class="catalog-card-top">
-          <div class="card-title-group">
-            <h3>${card.name}</h3>
-            <div class="card-bank-subtitle">${card.bank} · ${card.network}</div>
+          <div class="card-title-group" style="display:flex; align-items:center; gap:0.75rem;">
+            <img src="${card.bankLogo}" alt="${card.bank}" class="catalog-bank-logo" style="width:38px; height:38px; border-radius:10px; object-fit:contain; flex-shrink:0; background:rgba(255,255,255,0.06); padding:4px; border:1px solid rgba(255,255,255,0.1);">
+            <div>
+              <h3>${card.name}</h3>
+              <div class="card-bank-subtitle">${card.bank} · ${card.network}</div>
+            </div>
           </div>
           <div class="return-badge">${card.returnMin}–${card.returnMax}%</div>
         </div>
 
         <div class="catalog-mini-card skin-${card.skin}">
           <div class="catalog-mini-top">
-            <span class="catalog-mini-bank">${card.bank.toUpperCase()}</span>
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <img src="${card.bankLogo}" alt="${card.bank}" style="width:16px; height:16px; border-radius:4px; object-fit:contain;">
+              <span class="catalog-mini-bank">${card.bank.toUpperCase()}</span>
+            </div>
             ${card.metal ? '<span class="card-metal-tag">METAL</span>' : ''}
           </div>
           <div class="catalog-mini-bottom">
@@ -826,6 +837,139 @@
   });
 
   /* ─────────────────────────────────────────────
+   *  CREDVERT AI COPILOT INTERACTION
+   * ───────────────────────────────────────────── */
+  const AI_PROMPTS = {
+    flight: {
+      query: "I'm booking flights to Singapore for ₹85,000 next month. Between my HDFC Infinia, Axis Atlas, and Amex Plat Travel, which card gives me the highest net return and lounge access?",
+      steps: [
+        { icon: "⚙️", text: "<strong>Tool Invoked:</strong> <code>catalog.evaluate_category({ category: 'flights', spend: 85000, portal: 'SmartBuy' })</code>" },
+        { icon: "📊", text: "<strong>Calculated:</strong> Infinia 5X SmartBuy = 14,166 RPs (16.6% return, ₹14,166 value). Calendar daily cap: 7,500 bonus RPs." },
+        { icon: "⚡", text: "<strong>Tool Invoked:</strong> <code>partner_miles.simulate_transfer({ card: 'Axis Atlas', spend: 85000, ratio: '1:2' })</code>" }
+      ],
+      title: "🏆 Optimal Strategy: Split or swipe HDFC Infinia via SmartBuy",
+      metrics: [
+        { val: "₹14,166", lbl: "Net Miles Value (16.6%)" },
+        { val: "Unlimited", lbl: "T3 Lounge + 1 Guest" },
+        { val: "₹0", lbl: "Zero Forex Markup" }
+      ],
+      body: `<strong>Strategic Recommendation:</strong><br>
+        1. <strong>HDFC Infinia (Best Value):</strong> Book via SmartBuy flights for <strong>5X Reward Points (16.6% effective return)</strong>. You generate 14,166 points worth ₹14,166 when transferred 1:1 to Singapore KrisFlyer or booked on flights.<br>
+        2. <strong>Daily Cap Alert:</strong> Infinia SmartBuy has a calendar daily cap of 7,500 accelerated points. Since ₹85k generates 11,333 bonus points, <em>book two tickets on consecutive days</em> to capture the full 16.6% return, or use <strong>Axis Atlas</strong> for an unconstrained 5 EDGE Miles per ₹100.<br>
+        3. <strong>Lounge Access at DEL T3:</strong> Infinia gives you and your guest complimentary access to the Encalm Privé lounge without any prior quarter spend threshold.`
+    },
+    macbook: {
+      query: "I'm buying a ₹1,20,000 MacBook Pro. Should I buy directly on Apple Store India or on Amazon with SBI Cashback or HDFC Infinia?",
+      steps: [
+        { icon: "⚙️", text: "<strong>Tool Invoked:</strong> <code>catalog.check_merchant_discounts({ merchant: 'Amazon', card: 'sbi-cashback', amount: 120000 })</code>" },
+        { icon: "📊", text: "<strong>Calculated:</strong> SBI Cashback 5% = ₹6,000 (Hits monthly ₹5,000 max cashback cap -> Net return = ₹5,000 / 4.16%)." },
+        { icon: "⚡", text: "<strong>Tool Invoked:</strong> <code>gyftr.check_voucher_multiplier({ card: 'hdfc-infinia', brand: 'Amazon Shopping Voucher' })</code>" }
+      ],
+      title: "🏆 Optimal Strategy: Amazon via SBI Cashback or SmartBuy Gyftr",
+      metrics: [
+        { val: "₹5,000", lbl: "Instant Statement Credit" },
+        { val: "5.0% -> 4.16%", lbl: "Effective Return Rate" },
+        { val: "Immediate", lbl: "Cashback Turnaround" }
+      ],
+      body: `<strong>Strategic Recommendation:</strong><br>
+        1. <strong>SBI Cashback on Amazon:</strong> Gives an instant 5% cashback straight into your next statement, capped at ₹5,000 monthly. You capture the maximum ₹5,000 reward instantly.<br>
+        2. <strong>HDFC Gyftr Strategy:</strong> If you prefer travel points, purchase ₹20,000 Amazon vouchers on SmartBuy Gyftr (3X multiplier = 9.9% return) and put ₹1,00,000 directly on Infinia for a combined 5,280 RPs worth ₹5,280 in flight redemptions.`
+    },
+    audit: {
+      query: "Audit my latest June statement for unexpected fees, interest, and missed rewards.",
+      steps: [
+        { icon: "⚙️", text: "<strong>Tool Invoked:</strong> <code>vision_ocr.parse_statement({ period: 'June 2026', bank: 'HDFC Bank' })</code>" },
+        { icon: "⚠️", text: "<strong>Detected:</strong> ₹1,450 IGST + Forex markup on Spotify US & AWS subscriptions." },
+        { icon: "⚡", text: "<strong>Tool Invoked:</strong> <code>advisor.recommend_alternative({ category: 'international_saas', spend: 41200 })</code>" }
+      ],
+      title: "⚠️ Audit Findings: ₹1,450 Unnecessary Forex Fees Detected",
+      metrics: [
+        { val: "₹1,450", lbl: "Wasted Forex Markup" },
+        { val: "2", lbl: "Excluded Spend Categories" },
+        { val: "₹38,200", lbl: "Remaining for Fee Waiver" }
+      ],
+      body: `<strong>Audit Insights:</strong><br>
+        1. <strong>Forex Leakage:</strong> Your AWS cloud hosting ($499) was billed in USD with a 2% bank markup + 18% GST (2.36% net loss). Routing this via an ICICI Emeralde (1.5% markup) or zero-forex card saves ₹960/month.<br>
+        2. <strong>Jewellery Exclusion:</strong> ₹45,000 spent on Tanishq was classified under MCC 5094, which HDFC excluded from reward points as of latest circular.<br>
+        3. <strong>Milestone Status:</strong> You are ₹38,200 away from your ₹10L annual fee waiver with 42 days left in your card anniversary.`
+    },
+    lounge: {
+      query: "Flying international from Delhi Terminal 3 tonight with my spouse and child. Can all 3 of us enter the lounge for free?",
+      steps: [
+        { icon: "⚙️", text: "<strong>Tool Invoked:</strong> <code>lounge_db.get_access_rules({ airport: 'DEL', terminal: 'T3 International', cards: ['HDFC Infinia Metal', 'Axis Atlas'] })</code>" },
+        { icon: "📊", text: "<strong>Rule Evaluated:</strong> Infinia Metal Priority Pass permits primary + 1 complimentary guest." },
+        { icon: "⚡", text: "<strong>Rule Evaluated:</strong> Axis Atlas DreamFolks requires ₹15,000 spend in preceding quarter." }
+      ],
+      title: "🛋️ Lounge Access Strategy: Encalm Privé Delhi T3",
+      metrics: [
+        { val: "2 Adults Free", lbl: "Infinia Priority Pass" },
+        { val: "Child < 2 Free", lbl: "Infant Policy" },
+        { val: "Encalm Privé", lbl: "Eligible Lounge" }
+      ],
+      body: `<strong>Access Strategy:</strong><br>
+        1. <strong>Adults (Free):</strong> Your primary HDFC Infinia Priority Pass grants free entry to you and 1 accompanying adult guest at Delhi T3 Encalm Privé.<br>
+        2. <strong>Child Policy:</strong> Children under 2 years enter free. If older than 2, use your Add-on Infinia Priority Pass (if issued in advance) or swipe Axis Atlas to avoid paying the walk-in guest fee of ₹2,400 + GST.`
+    }
+  };
+
+  function setupAICopilot() {
+    const chipBtns    = document.querySelectorAll('.ai-chip-btn');
+    const userQueryEl = document.getElementById('aiUserQuery');
+    const stepsEl     = document.getElementById('aiAgentSteps');
+    const botRespEl   = document.getElementById('aiBotResponse');
+
+    if (!chipBtns.length || !userQueryEl || !stepsEl || !botRespEl) return;
+
+    chipBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const promptKey = btn.dataset.prompt;
+        const data = AI_PROMPTS[promptKey];
+        if (!data) return;
+
+        if (window.cvSound) window.cvSound.playClick();
+        chipBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Smooth transition
+        userQueryEl.style.opacity = '0.4';
+        stepsEl.style.opacity = '0.4';
+        botRespEl.style.opacity = '0.4';
+
+        setTimeout(() => {
+          userQueryEl.textContent = data.query;
+          stepsEl.innerHTML = data.steps.map(s => `
+            <div class="ai-step-item">
+              <span class="ai-step-icon">${s.icon}</span>
+              <span class="ai-step-text">${s.text}</span>
+            </div>
+          `).join('');
+
+          botRespEl.innerHTML = `
+            <div class="ai-verdict-box">
+              <div class="verdict-title">${data.title}</div>
+              <div class="verdict-metrics">
+                ${data.metrics.map(m => `
+                  <div class="metric-col">
+                    <span class="m-val">${m.val}</span>
+                    <span class="m-lbl">${m.lbl}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <p style="margin-top:0.75rem; color:var(--txt-90); font-size:0.92rem; line-height:1.6;">
+              ${data.body}
+            </p>
+          `;
+
+          userQueryEl.style.opacity = '1';
+          stepsEl.style.opacity = '1';
+          botRespEl.style.opacity = '1';
+        }, 150);
+      });
+    });
+  }
+
+  /* ─────────────────────────────────────────────
    *  BOOT SEQUENCE
    * ───────────────────────────────────────────── */
   function boot() {
@@ -833,6 +977,7 @@
     runAdvisorSimulation();
     runCalculator();
     renderCatalog('all', '');
+    setupAICopilot();
 
     // Pre-populate SMS with first sample
     if (smsInputText) {

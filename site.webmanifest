@@ -1,0 +1,23 @@
+{
+  "name": "Credvert — Credit Card Intelligence",
+  "short_name": "Credvert",
+  "description": "The right card, every checkout. India's smartest zero-knowledge credit card advisor.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090C",
+  "theme_color": "#09090C",
+  "icons": [
+    {
+      "src": "/assets/Icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/Icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

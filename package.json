@@ -1,0 +1,22 @@
+{
+  "name": "credvert-landing-page",
+  "version": "2.0.0",
+  "description": "Credvert — Smart Credit Card Advisor & Zero-Knowledge Vault Landing Page",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'Static assets ready for Vercel deployment'"
+  },
+  "keywords": [
+    "credit-card",
+    "fintech",
+    "landing-page",
+    "advisor",
+    "rewards",
+    "ai-agent",
+    "dpdp-act"
+  ],
+  "author": "Jay Chauhan",
+  "license": "MIT"
+}
