@@ -1,0 +1,30 @@
+# Credvert — AI & Engineering Rules
+
+## 1. Framework & Architecture
+- **Framework**: Next.js 14+ (App Router), React 18, TypeScript (Strict Mode).
+- **Styling**: Tailwind CSS with custom obsidian luxury tokens, CSS custom properties for dynamic physics.
+- **Motion**: Framer Motion for gesture-driven fluid springs and scroll storytelling.
+- **Icons**: Lucide React for consistent UI glyphs + custom SVG vectors for bank and network emblems.
+- **Components**: Modular, cleanly typed, separated by domain (`components/`, `lib/`, `types/`).
+
+## 2. Apple Design Principles (WWDC Fluid Interfaces)
+- **Fluid Springs**: Use spring physics (`damping: 1.0` for critically damped UI settle, `0.8` for momentum-driven gestures/flicks) instead of duration-based ease transitions.
+- **Interruptibility**: Animations must never lock out user input. Every interaction must be grab-and-reverseable mid-flight from its current presentation value.
+- **Zero Latency Feedback**: Respond on `pointerdown` / `:active`, not on click release. Scale buttons (`whileTap={{ scale: 0.98 }}`) instantly.
+- **Direct Manipulation**: 1:1 pointer tracking for 3D card tilt and dragging with velocity preservation on pointer release.
+- **Translucent Materials**: Multi-layered frosted glass (`backdrop-blur-xl`, `border-white/10`, ambient gradient meshes).
+
+## 3. Brand & Domain Identity
+- **Product Name**: `credVert.` (with lowercase 'c' and uppercase 'V', matching brand assets).
+- **Primary Domain**: `https://credvert.tech`
+- **Contact Emails**: `support@credvert.tech`, `grievance@credvert.tech`, `legal@credvert.tech`, `privacy@credvert.tech`.
+- **Brand Palette**:
+  - Dark Obsidian: `#09090C`, `#111217`, `#181A22`
+  - Aurum Gold: `#D4A853`, Light `#F2D594`, Deep `#9C7430`
+  - Emerald: `#10B981`
+  - Sapphire: `#3B82F6`
+
+## 4. Privacy & DPDP Act 2023 Compliance
+- Raw SMS bodies and full 16-digit card numbers must never touch cloud infrastructure.
+- Zero-knowledge client-side hashing (SHA-256) for deduplication.
+- Offline-first on-device parsing simulation.
