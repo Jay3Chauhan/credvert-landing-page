@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Logo } from '@/components/brand/Logo';
 import { ArrowLeft, ShieldAlert } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — Credvert',
-  description: 'Terms and Conditions governing the use of Credvert Card Intelligence Platform.',
+  title: 'Terms of Service',
+  description: 'Terms and Conditions governing the use of credVert Card Intelligence Platform.',
   alternates: {
     canonical: 'https://credvert.tech/terms',
   },
@@ -21,16 +21,10 @@ export default function TermsPage() {
           className="inline-flex items-center gap-2 text-xs font-mono font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Credvert Home</span>
+          <span>Back to home</span>
         </Link>
         <div className="flex items-center gap-2">
-          <Image
-            src="/assets/brand/credvert-mark.svg"
-            alt="Credvert Mark"
-            width={24}
-            height={24}
-            className="w-6 h-6"
-          />
+          <Logo markClassName="w-6 h-6" wordmarkClassName="h-4 w-auto" />
           <span className="text-xs font-mono text-neutral-600 dark:text-neutral-400 font-bold uppercase tracking-wider">
             Terms of Service
           </span>
@@ -52,7 +46,7 @@ export default function TermsPage() {
           <h2 className="text-xl font-display font-bold text-neutral-900 dark:text-white">1. Acceptance of Terms</h2>
           <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
             By accessing or using the website at <strong className="text-neutral-900 dark:text-white">https://credvert.tech</strong>,
-            or downloading and using the Credvert mobile applications, you agree to be bound by these Terms and
+            or downloading and using the credVert mobile applications, you agree to be bound by these Terms and
             Conditions and our Privacy Policy. If you do not agree, do not use the services.
           </p>
         </section>
@@ -60,7 +54,7 @@ export default function TermsPage() {
         <section className="space-y-4">
           <h2 className="text-xl font-display font-bold text-neutral-900 dark:text-white">2. Nature of Services</h2>
           <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            Credvert provides informational tools, algorithms, and calculators to assist users in understanding
+            credVert provides informational tools, algorithms, and calculators to assist users in understanding
             credit card reward multiplier structures, milestone thresholds, foreign exchange markups, and lounge
             benefits available in India.
           </p>
@@ -73,7 +67,7 @@ export default function TermsPage() {
           <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-300 leading-relaxed flex items-start gap-3">
             <ShieldAlert className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
             <div>
-              Credvert is not an RBI-registered NBFC, commercial bank, payment system operator, or SEBI-registered
+              credVert is not an RBI-registered NBFC, commercial bank, payment system operator, or SEBI-registered
               investment advisor. All content, recommendations, rankings, and calculations provided on the platform
               are for informational and educational purposes only. Always verify fees and reward conditions directly
               with your issuing bank before applying or executing transactions.
@@ -88,7 +82,7 @@ export default function TermsPage() {
           <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
             All bank names, card product titles, logos, and trademarks (including but not limited to HDFC Bank,
             Infinia, SBI Card, Axis Bank, Atlas, ICICI Bank, Emeralde, American Express, and IDFC FIRST Bank) are the
-            exclusive property of their respective owners. Their display on Credvert constitutes nominative fair use
+            exclusive property of their respective owners. Their display on credVert constitutes nominative fair use
             under applicable trademark law strictly for informational identification and comparison purposes.
           </p>
         </section>
@@ -109,7 +103,7 @@ export default function TermsPage() {
             <a href="mailto:legal@credvert.tech" className="text-credvert-goldDark dark:text-credvert-gold font-bold hover:underline">
               legal@credvert.tech
             </a>{' '}
-            or write to Jay Chauhan, Credvert Technologies, Ahmedabad, Gujarat, India.
+            or write to Jay Chauhan, credVert Technologies, Ahmedabad, Gujarat, India.
           </p>
         </section>
       </article>

@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Logo } from '@/components/brand/Logo';
 import { ShieldCheck, ArrowLeft, Lock, Mail, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy & Zero-Knowledge Security — Credvert',
+  title: 'Privacy Policy & Zero-Knowledge Security',
   description:
-    'Credvert Privacy Policy: On-device processing, DPDP Act 2023 compliance, Zero-Knowledge security architecture, and your rights.',
+    'credVert Privacy Policy: On-device processing, DPDP Act 2023 compliance, Zero-Knowledge security architecture, and your rights.',
   alternates: {
     canonical: 'https://credvert.tech/privacy',
   },
@@ -22,16 +22,10 @@ export default function PrivacyPage() {
           className="inline-flex items-center gap-2 text-xs font-mono font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Credvert Home</span>
+          <span>Back to home</span>
         </Link>
         <div className="flex items-center gap-2">
-          <Image
-            src="/assets/brand/credvert-mark.svg"
-            alt="Credvert Mark"
-            width={24}
-            height={24}
-            className="w-6 h-6"
-          />
+          <Logo markClassName="w-6 h-6" wordmarkClassName="h-4 w-auto" />
           <span className="text-xs font-mono text-credvert-goldDark dark:text-credvert-gold font-bold uppercase tracking-wider">
             DPDP Act 2023 Compliant
           </span>
@@ -57,7 +51,7 @@ export default function PrivacyPage() {
         <section className="space-y-4">
           <h2 className="text-xl font-display font-bold text-neutral-900 dark:text-white">1. Overview and Scope</h2>
           <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            Credvert (&quot;Credvert&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), operated at{' '}
+            credVert (&quot;credVert&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), operated at{' '}
             <strong className="text-neutral-900 dark:text-white">https://credvert.tech</strong> by Jay Chauhan, provides intelligent
             credit card spend optimization, rewards tracking, and financial analytics.
           </p>
@@ -75,7 +69,7 @@ export default function PrivacyPage() {
           </h2>
           <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
             The following data is processed exclusively inside your device&apos;s local application sandbox (RAM and
-            SQLite Cipher encrypted storage) and is mathematically prohibited from transmission to any Credvert
+            SQLite Cipher encrypted storage) and is mathematically prohibited from transmission to any credVert
             server or third-party cloud:
           </p>
           <ul className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
@@ -97,7 +91,7 @@ export default function PrivacyPage() {
             <li className="flex items-start gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
               <span>
-                <strong className="text-neutral-900 dark:text-white">One-Time Passwords (OTPs):</strong> Credvert’s regex filter strictly ignores OTPs, login codes,
+                <strong className="text-neutral-900 dark:text-white">One-Time Passwords (OTPs):</strong> credVert’s regex filter strictly ignores OTPs, login codes,
                 and authentication passwords. They are never read or stored under any circumstance.
               </span>
             </li>
@@ -169,7 +163,7 @@ export default function PrivacyPage() {
           <div className="p-5 rounded-3xl bg-white dark:bg-white/[0.03] border border-black/10 dark:border-white/10 space-y-2 text-xs shadow-sm">
             <div className="font-bold text-neutral-900 dark:text-white">DPDP Grievance Officer:</div>
             <div className="text-neutral-700 dark:text-neutral-300 font-medium">Jay Chauhan</div>
-            <div className="text-neutral-500 dark:text-neutral-400">Credvert Technologies, Ahmedabad, Gujarat, India</div>
+            <div className="text-neutral-500 dark:text-neutral-400">credVert Technologies, Ahmedabad, Gujarat, India</div>
             <div className="text-credvert-goldDark dark:text-credvert-gold font-semibold">
               Email:{' '}
               <a href="mailto:grievance@credvert.tech" className="hover:underline">

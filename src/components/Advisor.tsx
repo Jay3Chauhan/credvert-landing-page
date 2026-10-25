@@ -36,7 +36,7 @@ const CATEGORIES: Array<{ id: SpendCategory; label: string; icon: React.ReactNod
 
 const PRESETS = [3500, 15000, 45000, 120000, 250000];
 
-export function Advisor() {
+export function Advisor({ embedded = false }: { embedded?: boolean }) {
   const [category, setCategory] = useState<SpendCategory>('dining');
   const [amount, setAmount] = useState<number>(15000);
   const [isIntl, setIsIntl] = useState<boolean>(false);
@@ -51,10 +51,10 @@ export function Advisor() {
   };
 
   return (
-    <section id="advisor" className="py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id={embedded ? undefined : 'advisor'} className={embedded ? 'relative' : 'py-20 md:py-28 relative'}>
+      <div className={embedded ? '' : 'max-w-7xl mx-auto px-4 sm:px-6'}>
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={embedded ? 'hidden' : 'text-center max-w-3xl mx-auto mb-16'}>
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-credvert-gold/15 border border-credvert-gold/30 text-xs font-mono font-semibold text-credvert-goldDark dark:text-credvert-goldLight mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             <span>REAL-TIME SPEND OPTIMIZER</span>

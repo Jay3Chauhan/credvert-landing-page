@@ -18,16 +18,21 @@ interface ToastProps {
 
 export default function Toast({ toasts, onDismiss }: ToastProps) {
   return (
-    <div className="fixed top-20 right-4 sm:right-6 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none">
-      <AnimatePresence>
+    <div
+      className="fixed top-[calc(var(--nav-height)+12px)] left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-6 z-[80] flex flex-col gap-2 max-w-sm w-[calc(100%-2rem)] pointer-events-none"
+      role="status"
+      aria-live="polite"
+    >
+      <AnimatePresence mode="popLayout">
         {toasts.map((toast) => (
           <motion.div
             key={toast.id}
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -15, scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-            className="pointer-events-auto flex items-start gap-3 p-4 rounded-2xl bg-white/95 dark:bg-neutral-900/95 border border-black/10 dark:border-white/10 shadow-xl dark:shadow-2xl backdrop-blur-2xl text-left"
+            layout
+            initial={{ opacity: 0, y: -16, scale: 0.96, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 0.96, filter: 'blur(6px)' }}
+            transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+            className="pointer-events-auto flex items-start gap-3 p-3.5 rounded-2xl glass shadow-glass text-left"
           >
             {toast.type === 'success' && <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />}
             {toast.type === 'info' && <Info className="w-5 h-5 text-credvert-gold shrink-0 mt-0.5" />}

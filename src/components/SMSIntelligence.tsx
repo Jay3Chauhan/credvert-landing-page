@@ -18,7 +18,7 @@ import { SMSParseResult } from '@/types';
 import { playHapticFeedback } from '@/lib/sound';
 import { AppleWordReveal } from '@/components/ui/AppleText';
 
-export default function SMSIntelligence() {
+export default function SMSIntelligence({ embedded = false }: { embedded?: boolean }) {
   const [activeSample, setActiveSample] = useState<string>('sample-1');
   const [inputText, setInputText] = useState<string>(SMS_SAMPLES['sample-1']);
   const [parseResult, setParseResult] = useState<SMSParseResult | null>(null);
@@ -52,12 +52,12 @@ export default function SMSIntelligence() {
   };
 
   return (
-    <section id="sms-intelligence" className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
-      {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-emerald-500/[0.04] rounded-full blur-[140px] pointer-events-none" />
-
+    <section
+      id={embedded ? undefined : 'sms-intelligence'}
+      className={embedded ? 'relative' : 'relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden'}
+    >
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16">
+      <div className={embedded ? 'hidden' : 'text-center max-w-3xl mx-auto mb-16'}>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export default function SMSIntelligence() {
         </h2>
 
         <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
-          Traditional fintech uploads your private bank SMS to remote servers. Credvert parses OTP-free
+          Traditional fintech uploads your private bank SMS to remote servers. credVert. parses OTP-free
           transaction alerts directly on iOS/Android inside your device’s sandbox in under 0.02 milliseconds.
         </p>
       </div>

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { Logo } from '@/components/brand/Logo';
 import { ArrowLeft, Trash2, CheckCircle2, Send } from 'lucide-react';
 import { playHapticFeedback } from '@/lib/sound';
 
@@ -31,16 +31,10 @@ export default function DeletionPage() {
           className="inline-flex items-center gap-2 text-xs font-mono font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Credvert Home</span>
+          <span>Back to home</span>
         </Link>
         <div className="flex items-center gap-2">
-          <Image
-            src="/assets/brand/credvert-mark.svg"
-            alt="Credvert Mark"
-            width={24}
-            height={24}
-            className="w-6 h-6"
-          />
+          <Logo markClassName="w-6 h-6" wordmarkClassName="h-4 w-auto" />
           <span className="text-xs font-mono text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider">
             DPDP §12 Right to Erasure
           </span>
@@ -64,7 +58,7 @@ export default function DeletionPage() {
 
         <section className="space-y-4">
           <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
-            At Credvert, you have an absolute and unconditional right to have your account and all associated
+            At credVert, you have an absolute and unconditional right to have your account and all associated
             metadata permanently erased from our systems. Because raw financial SMS alerts and card PINs never leave
             your phone, full deletion is instantaneous and irreversible.
           </p>
@@ -79,7 +73,7 @@ export default function DeletionPage() {
             <span>Method 1: Instant In-App Erasure (Recommended)</span>
           </div>
           <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans">
-            Open the Credvert mobile app → Navigate to <strong>Settings</strong> → Scroll to the bottom → Tap{' '}
+            Open the credVert mobile app → Navigate to <strong>Settings</strong> → Scroll to the bottom → Tap{' '}
             <strong className="text-red-500 dark:text-red-400">Delete Account and Erase Local Vault</strong>. This wipes your local
             SQLite database, tears down local biometric encryption keys, and cancels cloud sync tokens immediately.
           </p>

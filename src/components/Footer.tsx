@@ -1,222 +1,163 @@
 'use client';
 
-import React from 'react';
-import Image from 'next/image';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Github, Mail, MapPin, ArrowUpRight } from 'lucide-react';
-import { useTheme } from '@/components/ThemeProvider';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus, ShieldCheck } from 'lucide-react';
+import { Logo, Wordmark } from '@/components/brand/Logo';
+import { springSettle } from '@/lib/motion';
+
+type FooterLink = { label: string; href: string; external?: boolean };
+
+const COLUMNS: Array<{ title: string; links: FooterLink[] }> = [
+  {
+    title: 'Product',
+    links: [
+      { label: 'Features', href: '/#features' },
+      { label: 'How it works', href: '/#how' },
+      { label: 'Best-card advisor', href: '/#advisor' },
+      { label: 'Card catalogue', href: '/#cards' },
+      { label: 'Offers', href: '/#offers' },
+    ],
+  },
+  {
+    title: 'Open source',
+    links: [
+      { label: 'Flutter app', href: 'https://github.com/Jay3Chauhan/CreditVance', external: true },
+      { label: 'FastAPI backend', href: 'https://github.com/Jay3Chauhan/CreditVance-Backend', external: true },
+      {
+        label: 'API reference',
+        href: 'https://github.com/Jay3Chauhan/CreditVance-Backend/blob/main/docs/API_REFERENCE.md',
+        external: true,
+      },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Privacy policy', href: '/privacy' },
+      { label: 'Terms of service', href: '/terms' },
+      { label: 'Delete my data', href: '/deletion' },
+      { label: 'Grievance officer', href: 'mailto:grievance@credvert.tech' },
+    ],
+  },
+  {
+    title: 'Contact',
+    links: [
+      { label: 'support@credvert.tech', href: 'mailto:support@credvert.tech' },
+      { label: 'privacy@credvert.tech', href: 'mailto:privacy@credvert.tech' },
+      { label: 'legal@credvert.tech', href: 'mailto:legal@credvert.tech' },
+    ],
+  },
+];
+
+function FooterAnchor({ link }: { link: FooterLink }) {
+  const cls = 'text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors';
+  if (link.external || link.href.startsWith('mailto:') || link.href.includes('#')) {
+    return (
+      <a href={link.href} className={cls} {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+        {link.label}
+      </a>
+    );
+  }
+  return (
+    <Link href={link.href} className={cls}>
+      {link.label}
+    </Link>
+  );
+}
 
 export default function Footer() {
-  const { theme } = useTheme();
+  const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <footer className="border-t border-black/10 dark:border-white/[0.08] bg-[#F0EFEA] dark:bg-neutral-950/80 backdrop-blur-xl relative overflow-hidden transition-colors duration-300">
-      {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[300px] bg-credvert-gold/[0.03] rounded-full blur-[160px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-black/10 dark:border-white/[0.06]">
-          {/* Brand Column */}
-          <div className="lg:col-span-5 space-y-5">
-            <Link href="/" className="inline-flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 p-1.5 flex items-center justify-center group-hover:scale-105 active:scale-95 transition-all shadow-md">
-                <Image
-                  src="/assets/brand/credvert-mark.svg"
-                  alt="Credvert Mark"
-                  width={28}
-                  height={28}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <Image
-                  src={theme === 'light' ? '/assets/brand/credvert-dark.svg' : '/assets/brand/credvert-gold.svg'}
-                  alt="credVert."
-                  width={112}
-                  height={24}
-                  className="h-5 w-auto object-contain transition-opacity"
-                />
-                <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 tracking-widest uppercase">
-                  Card Intelligence Platform
-                </span>
-              </div>
-            </Link>
-
-            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed max-w-sm">
-              The intelligent credit card advisor and zero-knowledge hardware vault. Engineered for
-              Indian cardholders to maximize miles, rewards, and cashback on every transaction.
+    <footer className="relative border-t border-black/[0.07] dark:border-white/[0.07] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 pt-16 sm:pt-20">
+        <div className="grid lg:grid-cols-[1.3fr_2fr] gap-12">
+          <div className="max-w-sm">
+            <Logo />
+            <p className="mt-5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+              The card advisor for Indian wallets. Know which card to tap for every purchase, with your data kept on your
+              phone.
             </p>
-
-            <div className="space-y-1.5 text-xs text-neutral-600 dark:text-neutral-400 font-mono">
-              <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-sans font-semibold">
-                <span>Architected by Jay Chauhan</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-credvert-gold" />
-                <a href="mailto:support@credvert.tech" className="hover:text-credvert-goldDark dark:hover:text-credvert-gold transition-colors font-medium">
-                  support@credvert.tech
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                <a href="mailto:grievance@credvert.tech" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-medium">
-                  grievance@credvert.tech (DPDP Grievance Officer)
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-neutral-400" />
-                <span>Ahmedabad, Gujarat, India</span>
-              </div>
-            </div>
+            <span className="mt-6 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-xs font-semibold">
+              <ShieldCheck className="w-3.5 h-3.5" /> Built for the DPDP Act 2023
+            </span>
           </div>
 
-          {/* Product Links */}
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-900 dark:text-neutral-200 font-bold">
-              Product
-            </h4>
-            <ul className="space-y-2.5 text-xs text-neutral-600 dark:text-neutral-400 font-medium">
-              <li>
-                <a href="#advisor" className="hover:text-black dark:hover:text-white transition-colors">
-                  Smart Advisor
-                </a>
-              </li>
-              <li>
-                <a href="#ai-copilot" className="hover:text-black dark:hover:text-white transition-colors">
-                  Claude AI Copilot
-                </a>
-              </li>
-              <li>
-                <a href="#sms-intelligence" className="hover:text-black dark:hover:text-white transition-colors">
-                  SMS Intelligence
-                </a>
-              </li>
-              <li>
-                <a href="#calculator" className="hover:text-black dark:hover:text-white transition-colors">
-                  ROI Calculator
-                </a>
-              </li>
-              <li>
-                <a href="#cards" className="hover:text-black dark:hover:text-white transition-colors">
-                  Card Catalog
-                </a>
-              </li>
-              <li>
-                <a href="#offers" className="hover:text-black dark:hover:text-white transition-colors">
-                  Exclusive Perks
-                </a>
-              </li>
-            </ul>
+          {/* Desktop columns */}
+          <div className="hidden sm:grid grid-cols-4 gap-8">
+            {COLUMNS.map((col) => (
+              <nav key={col.title} aria-label={col.title}>
+                <h3 className="text-xs font-semibold tracking-[0.12em] uppercase text-neutral-900 dark:text-white mb-4">
+                  {col.title}
+                </h3>
+                <ul className="space-y-3">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      <FooterAnchor link={l} />
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
           </div>
 
-          {/* Open Source Ecosystem */}
-          <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-900 dark:text-neutral-200 font-bold flex items-center gap-1.5">
-              <Github className="w-3.5 h-3.5 text-credvert-gold" />
-              <span>Open Source</span>
-            </h4>
-            <ul className="space-y-2.5 text-xs text-neutral-600 dark:text-neutral-400 font-medium">
-              <li>
-                <a
-                  href="https://github.com/Jay3Chauhan/CreditVance"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 group"
-                >
-                  <span>CreditVance Flutter Client</span>
-                  <ArrowUpRight className="w-3 h-3 text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/Jay3Chauhan/CreditVance-Backend"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 group"
-                >
-                  <span>FastAPI Cloud Backend</span>
-                  <ArrowUpRight className="w-3 h-3 text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/Jay3Chauhan/CreditVance-Backend/blob/main/docs/API_REFERENCE.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 group"
-                >
-                  <span>REST API Reference</span>
-                  <ArrowUpRight className="w-3 h-3 text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/Jay3Chauhan/CreditVance-Backend/blob/main/docs/FRONTEND_GUIDE.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 group"
-                >
-                  <span>Architecture Documentation</span>
-                  <ArrowUpRight className="w-3 h-3 text-neutral-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal & Compliance */}
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-900 dark:text-neutral-200 font-bold">
-              Legal & Privacy
-            </h4>
-            <ul className="space-y-2.5 text-xs text-neutral-600 dark:text-neutral-400 font-medium">
-              <li>
-                <Link href="/privacy" className="hover:text-black dark:hover:text-white transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-black dark:hover:text-white transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link href="/deletion" className="hover:text-black dark:hover:text-white transition-colors">
-                  Right to Erasure
-                </Link>
-              </li>
-              <li>
-                <a href="mailto:grievance@credvert.tech" className="hover:text-black dark:hover:text-white transition-colors">
-                  Grievance Redressal
-                </a>
-              </li>
-              <li className="pt-2">
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[10px] font-mono font-bold">
-                  <ShieldCheck className="w-3 h-3" />
-                  DPDP Act 2023
-                </span>
-              </li>
-            </ul>
+          {/* Mobile: collapsible groups */}
+          <div className="sm:hidden border-t border-black/10 dark:border-white/10">
+            {COLUMNS.map((col) => {
+              const isOpen = open === col.title;
+              return (
+                <div key={col.title} className="border-b border-black/10 dark:border-white/10">
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    onClick={() => setOpen(isOpen ? null : col.title)}
+                    className="w-full flex items-center justify-between py-4 text-sm font-semibold text-neutral-900 dark:text-white active:opacity-60"
+                  >
+                    {col.title}
+                    <motion.span animate={{ rotate: isOpen ? 45 : 0 }} transition={springSettle}>
+                      <Plus className="w-4 h-4 text-neutral-500" />
+                    </motion.span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.ul
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={springSettle}
+                        className="overflow-hidden"
+                      >
+                        {col.links.map((l) => (
+                          <li key={l.label} className="pb-3 pl-1">
+                            <FooterAnchor link={l} />
+                          </li>
+                        ))}
+                        <li className="h-2" aria-hidden />
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500 dark:text-neutral-400">
-          <div>
-            © 2026 Credvert Technologies. All rights reserved.{' '}
-            <span className="font-mono text-neutral-700 dark:text-neutral-300 font-semibold">https://credvert.tech</span>
-          </div>
-          <div className="flex items-center gap-4 font-medium">
-            <Link href="/privacy" className="hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
-              Privacy
-            </Link>
-            <Link href="/terms" className="hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
-              Terms
-            </Link>
-            <Link href="/deletion" className="hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors">
-              Erasure Portal
-            </Link>
-          </div>
+        <div className="mt-14 pt-6 border-t border-black/[0.07] dark:border-white/[0.07] flex flex-col sm:flex-row justify-between gap-3 text-xs text-neutral-500 dark:text-neutral-500">
+          <p>© {new Date().getFullYear()} credVert. Technologies · Ahmedabad, India · Designed by Jay Chauhan</p>
+          <p>
+            credVert. is not a bank or NBFC. Card names and logos belong to their respective issuers.
+          </p>
         </div>
+      </div>
+
+      <div aria-hidden className="relative mt-10 -mb-[3.5vw] px-5 select-none pointer-events-none">
+        <Wordmark
+          goldDot
+          className="w-full h-auto text-neutral-900/[0.06] dark:text-white/[0.05]"
+          title=""
+        />
       </div>
     </footer>
   );

@@ -3,17 +3,10 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import {
-  CreditCard as CardIcon,
-  Search,
-  Check,
-  Plus,
-  ChevronDown,
-  ChevronUp,
-} from 'lucide-react';
+import { Search, Check, Plus, ChevronDown, ChevronUp } from 'lucide-react';
 import { CREDVERT_CARDS } from '@/lib/cards-data';
 import { playHapticFeedback } from '@/lib/sound';
-import { AppleWordReveal } from '@/components/ui/AppleText';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 interface CardCatalogProps {
   selectedCardIds: string[];
@@ -60,35 +53,13 @@ export default function CardCatalog({
   }, [activeFilter, searchQuery]);
 
   return (
-    <section id="cards" className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Background glow */}
-      <div className="absolute top-1/4 right-1/4 w-[600px] h-[400px] bg-credvert-gold/[0.03] rounded-full blur-[140px] pointer-events-none" />
-
-      {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-14">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-credvert-gold/15 border border-credvert-gold/30 text-credvert-goldDark dark:text-credvert-gold text-xs font-mono font-medium tracking-wide mb-4 shadow-sm"
-        >
-          <CardIcon className="w-3.5 h-3.5" />
-          <span>CURATED INDIAN CREDIT CARD REPOSITORY</span>
-        </motion.div>
-
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-neutral-900 dark:text-white mb-4">
-          <AppleWordReveal text="Every fee audited." />{' '}
-          <span className="bg-gradient-to-r from-credvert-gold via-amber-500 to-amber-600 dark:from-credvert-gold dark:via-credvert-goldLight dark:to-amber-200 bg-clip-text text-transparent">
-            Every perk decoded.
-          </span>
-        </h2>
-
-        <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
-          Compare milestone rules, GST-inclusive forex markups, airport lounge passes, and true cashback yields
-          across top-tier metal and everyday value cards.
-        </p>
-      </div>
+    <section id="cards" className="relative w-full py-24 sm:py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" aria-label="Card catalogue">
+      <SectionHeading
+        eyebrow="Card catalogue"
+        title={['Every fee audited.', <span key="b" className="text-gold-gradient">Every perk decoded.</span>]}
+        description="Milestones, GST-inclusive forex, lounge access and true cashback across premium metal and everyday cards. Add up to three to compare side by side."
+        className="mb-14"
+      />
 
       {/* Filter Tabs & Search Bar */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">

@@ -11,20 +11,21 @@ const config: Config = {
     extend: {
       colors: {
         credvert: {
-          gold: '#C5A880',
-          goldLight: '#E5C79E',
-          goldDark: '#8A6E48',
-          obsidian: '#07090D',
+          gold: '#D4A853',
+          goldLight: '#F2D594',
+          goldDark: '#9C7430',
+          brand: '#FDDA56',
+          obsidian: '#09090C',
           alabaster: '#F8F7F4',
         },
         obsidian: {
-          DEFAULT: '#07090D',
-          50: '#1E222E',
-          100: '#171922',
-          200: '#13141C',
-          300: '#0F1016',
-          400: '#0C0D12',
-          500: '#07090D',
+          DEFAULT: '#09090C',
+          50: '#22252F',
+          100: '#181A22',
+          200: '#111217',
+          300: '#0E0F13',
+          400: '#0B0C0F',
+          500: '#09090C',
         },
         gold: {
           light: '#F2D594',
@@ -52,10 +53,25 @@ const config: Config = {
         gold: '0 4px 20px rgba(212, 168, 83, 0.25)',
         'gold-lg': '0 10px 32px rgba(212, 168, 83, 0.35)',
         card: 'var(--card-shadow)',
+        glass: 'inset 0 1px 0 0 rgba(255,255,255,0.08), 0 20px 50px -20px rgba(0,0,0,0.6)',
       },
       transitionTimingFunction: {
         spring: 'cubic-bezier(0.16, 1, 0.3, 1)',
         expo: 'cubic-bezier(0.19, 1, 0.22, 1)',
+      },
+      keyframes: {
+        marquee: {
+          from: { transform: 'translate3d(0,0,0)' },
+          to: { transform: 'translate3d(-50%,0,0)' },
+        },
+        laserScan: {
+          '0%': { top: '0%' },
+          '100%': { top: '100%' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 40s linear infinite',
+        laserScan: 'laserScan 0.7s cubic-bezier(0.65,0,0.35,1) forwards',
       },
     },
   },

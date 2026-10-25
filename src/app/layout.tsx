@@ -2,6 +2,12 @@ import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Outfit, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { FAQ_ITEMS } from '@/lib/faq-data';
+
+const TITLE = 'credVert. — The right card for every swipe';
+const DESCRIPTION =
+  'credVert. tells you which credit card to tap for every purchase, tracks fee waivers and milestones, and parses bank SMS on your phone. Built for India and the DPDP Act 2023.';
+const OG_IMAGE = '/assets/mockups/wallet-mockup.png';
 
 const sansFont = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -23,8 +29,8 @@ const monoFont = JetBrains_Mono({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#07090D' },
-    { media: '(prefers-color-scheme: light)', color: '#F8F7F4' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090C' },
+    { media: '(prefers-color-scheme: light)', color: '#FAFAF7' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -33,60 +39,50 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://credvert.tech'),
-  title: 'Credvert — Zero-Knowledge Credit Card Intelligence & Advisor',
-  description:
-    'Maximize credit card rewards, airline miles, and cashbacks with real-time optimization. 100% on-device SMS parsing compliant with DPDP Act 2023. Zero cloud leakage.',
+  title: { default: TITLE, template: '%s · credVert.' },
+  description: DESCRIPTION,
   keywords: [
     'credit card rewards India',
+    'best credit card for purchase',
     'credit card advisor',
-    'best credit card optimization',
     'HDFC Infinia reward multiplier',
-    'SBI Cashback optimization',
-    'Axis Atlas airline miles transfer',
-    'ICICI Emeralde zero forex',
-    'DPDP Act 2023 compliance',
+    'SBI Cashback',
+    'Axis Atlas miles',
+    'zero forex credit card',
+    'credit card fee waiver tracker',
     'on-device SMS expense tracker',
-    'Claude 3.5 AI fintech copilot',
-    'zero-knowledge hardware vault',
+    'DPDP Act 2023',
     'airport lounge access India',
   ],
   authors: [{ name: 'Jay Chauhan', url: 'https://credvert.tech' }],
   creator: 'Jay Chauhan',
-  publisher: 'Credvert Technologies',
-  applicationName: 'Credvert',
-  alternates: {
-    canonical: 'https://credvert.tech',
-  },
+  publisher: 'credVert. Technologies',
+  applicationName: 'credVert.',
+  alternates: { canonical: 'https://credvert.tech' },
   icons: {
-    icon: '/favicon.png',
-    apple: '/assets/brand/credvert-mark.svg',
+    icon: [
+      { url: '/favicon.png', type: 'image/png', sizes: '64x64' },
+      { url: '/assets/Icon-192.png', type: 'image/png', sizes: '192x192' },
+    ],
+    apple: { url: '/assets/Icon-512.png', sizes: '512x512' },
     shortcut: '/favicon.png',
   },
   manifest: '/site.webmanifest',
   openGraph: {
     type: 'website',
     url: 'https://credvert.tech',
-    title: 'Credvert — Zero-Knowledge Credit Card Intelligence & Advisor',
-    description:
-      'Maximize rewards, airline miles, and cashback on every swipe with real-time optimization math and on-device privacy.',
-    siteName: 'Credvert',
-    images: [
-      {
-        url: 'https://credvert.tech/assets/brand/credvert-gold.svg',
-        width: 1200,
-        height: 630,
-        alt: 'Credvert - Credit Card Intelligence',
-      },
-    ],
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: 'credVert.',
+    images: [{ url: OG_IMAGE, width: 1536, height: 1024, alt: 'credVert. app on iPhone' }],
     locale: 'en_IN',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Credvert — Zero-Knowledge Credit Card Intelligence & Advisor',
-    description:
-      'Real-time reward optimization engine and DPDP Act 2023 on-device intelligence for Indian credit cards.',
+    title: TITLE,
+    description: DESCRIPTION,
     creator: '@jay3chauhan',
-    images: ['https://credvert.tech/assets/brand/credvert-gold.svg'],
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,
@@ -113,8 +109,8 @@ export default function RootLayout({
         '@type': 'WebSite',
         '@id': 'https://credvert.tech/#website',
         url: 'https://credvert.tech',
-        name: 'Credvert',
-        description: 'Zero-Knowledge Credit Card Intelligence & Advisor',
+        name: 'credVert.',
+        description: TITLE,
         publisher: {
           '@id': 'https://credvert.tech/#organization',
         },
@@ -122,7 +118,7 @@ export default function RootLayout({
       {
         '@type': 'SoftwareApplication',
         '@id': 'https://credvert.tech/#application',
-        name: 'Credvert',
+        name: 'credVert.',
         operatingSystem: 'Android, iOS, Web',
         applicationCategory: 'FinanceApplication',
         offers: {
@@ -138,7 +134,7 @@ export default function RootLayout({
           worstRating: '1',
         },
         description:
-          'Credvert is a zero-knowledge credit card optimization engine providing real-time recommendations, on-device SMS spend intelligence, and fee waiver tracking.',
+          DESCRIPTION,
         author: {
           '@type': 'Person',
           name: 'Jay Chauhan',
@@ -149,9 +145,9 @@ export default function RootLayout({
       {
         '@type': 'Organization',
         '@id': 'https://credvert.tech/#organization',
-        name: 'Credvert Technologies',
+        name: 'credVert. Technologies',
         url: 'https://credvert.tech',
-        logo: 'https://credvert.tech/assets/brand/credvert-gold.svg',
+        logo: 'https://credvert.tech/assets/Icon-512.png',
         founder: {
           '@type': 'Person',
           name: 'Jay Chauhan',
@@ -172,48 +168,11 @@ export default function RootLayout({
       {
         '@type': 'FAQPage',
         '@id': 'https://credvert.tech/#faq',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: 'How does Credvert pick the best card for my purchase?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Credvert maintains a real-time catalog of reward multiplier rules including SmartBuy portals (5X–10X), category exclusions, monthly spend caps, and point redemption values. It calculates precise net financial return including 18% GST deduction on forex markups.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Is granting SMS permission safe?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes. Credvert runs an isolated regex parser directly inside your phone RAM. Full 16-digit card numbers, OTPs, and raw SMS text bodies are strictly discarded by design under DPDP Act 2023 §6. No SMS content ever reaches any remote server.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'How does foreign exchange markup calculation work?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Most Indian banks charge between 2.0% and 3.5% forex markup plus 18% GST (e.g. 3.5% x 1.18 = 4.13% effective). Credvert deducts this exact penalty from your reward rate so you see true net yield.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: "What about iOS? Apple doesn't allow SMS reading.",
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'On iOS, Credvert provides a one-tap clipboard paste parser. Parsing happens 100% on-device with zero-knowledge hardware guarantees.',
-            },
-          },
-          {
-            '@type': 'Question',
-            name: 'Can I delete my account and all data permanently?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'Yes, unconditionally. Under the DPDP Act 2023 and GDPR you have an absolute Right to Erasure in-app or via our online deletion portal within 24 hours.',
-            },
-          },
-        ],
+        mainEntity: FAQ_ITEMS.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: { '@type': 'Answer', text: f.answer },
+        })),
       },
     ],
   };
@@ -255,23 +214,16 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="bg-[#F8F7F4] dark:bg-[#07090D] text-neutral-900 dark:text-neutral-100 font-sans selection:bg-credvert-gold/30 selection:text-neutral-900 dark:selection:text-white transition-colors duration-300 relative min-h-screen">
+      <body className="bg-[#FAFAF7] dark:bg-[#09090C] text-neutral-900 dark:text-neutral-100 font-sans antialiased selection:bg-credvert-gold/30 selection:text-neutral-900 dark:selection:text-white relative min-h-screen">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-full focus:bg-credvert-gold focus:text-neutral-950 focus:text-sm focus:font-semibold"
+        >
+          Skip to content
+        </a>
         <ThemeProvider>
-          {/* Ambient dynamic background mesh */}
-          <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-            <div className="absolute -top-40 left-1/4 w-[700px] h-[700px] bg-amber-400/[0.07] dark:bg-credvert-gold/[0.04] rounded-full blur-[160px] animate-ambient" />
-            <div
-              className="absolute top-1/2 -right-40 w-[600px] h-[600px] bg-blue-400/[0.05] dark:bg-indigo-500/[0.03] rounded-full blur-[160px] animate-ambient"
-              style={{ animationDelay: '-4s' }}
-            />
-            <div
-              className="absolute -bottom-40 left-1/3 w-[650px] h-[650px] bg-emerald-400/[0.05] dark:bg-emerald-500/[0.03] rounded-full blur-[160px] animate-ambient"
-              style={{ animationDelay: '-8s' }}
-            />
-          </div>
-
-          {/* Page Content */}
-          <div className="relative z-10 flex flex-col min-h-screen">{children}</div>
+          <div id="main" className="relative flex flex-col min-h-screen">{children}</div>
+          <div className="grain" aria-hidden="true" />
         </ThemeProvider>
       </body>
     </html>

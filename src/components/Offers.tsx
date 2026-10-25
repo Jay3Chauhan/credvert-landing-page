@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Tag, Copy, Check, Sparkles, ShieldCheck } from 'lucide-react';
+import { Copy, Check, Sparkles, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 import { playHapticFeedback } from '@/lib/sound';
-import { AppleWordReveal } from '@/components/ui/AppleText';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 interface OfferItem {
   id: string;
@@ -59,59 +59,70 @@ const OFFERS: OfferItem[] = [
 
 export default function Offers({ onCopyCode }: { onCopyCode?: (code: string) => void }) {
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   const handleCopy = (offer: OfferItem) => {
-    navigator.clipboard.writeText(offer.code);
+    if (offer.isAutoCredit) return;
+    navigator.clipboard?.writeText(offer.code);
     playHapticFeedback('success');
     setCopiedId(offer.id);
     onCopyCode?.(offer.code);
     setTimeout(() => setCopiedId(null), 2500);
   };
 
+  const scrollBy = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    playHapticFeedback('light');
+    const card = el.querySelector<HTMLElement>('[data-offer]');
+    el.scrollBy({ left: dir * ((card?.offsetWidth ?? 360) + 20), behavior: 'smooth' });
+  };
+
   return (
-    <section id="offers" className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-amber-500/[0.03] rounded-full blur-[140px] pointer-events-none" />
-
-      {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-mono font-medium tracking-wide mb-4 shadow-sm"
-        >
-          <Tag className="w-3.5 h-3.5" />
-          <span>REAL-TIME VERIFIED MERCHANT CODES</span>
-        </motion.div>
-
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-neutral-900 dark:text-white mb-4">
-          <AppleWordReveal text="Exclusive Cardholder Perks." />{' '}
-          <span className="bg-gradient-to-r from-credvert-gold via-amber-500 to-amber-600 dark:from-credvert-gold dark:via-amber-300 dark:to-yellow-200 bg-clip-text text-transparent">
-            No expired vouchers.
-          </span>
-        </h2>
-
-        <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
-          Credvert curates and verifies card-linked merchant promotions daily so you never miss
-          instant restaurant discounts or miles multiplier accelerators.
-        </p>
+    <section id="offers" className="relative py-24 sm:py-32" aria-label="Card offers">
+      <div className="max-w-7xl mx-auto px-5 flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+        <SectionHeading
+          align="left"
+          eyebrow="Perks"
+          title={['Card-linked offers.', <span key="b" className="text-neutral-400 dark:text-neutral-500">Checked daily.</span>]}
+          description="Restaurant discounts, statement cashback and miles accelerators matched to the cards you actually hold."
+        />
+        <div className="hidden md:flex items-center gap-2 shrink-0">
+          <button
+            type="button"
+            aria-label="Previous offers"
+            onClick={() => scrollBy(-1)}
+            className="w-11 h-11 rounded-full border border-black/10 dark:border-white/15 flex items-center justify-center text-neutral-700 dark:text-neutral-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] active:scale-95 transition"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Next offers"
+            onClick={() => scrollBy(1)}
+            className="w-11 h-11 rounded-full border border-black/10 dark:border-white/15 flex items-center justify-center text-neutral-700 dark:text-neutral-200 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] active:scale-95 transition"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
-      {/* Grid of 4 Offers */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div
+        ref={trackRef}
+        className="flex gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-none px-5 pb-4 scroll-px-5 lg:px-[max(1.25rem,calc((100vw-80rem)/2+1.25rem))] lg:scroll-px-[max(1.25rem,calc((100vw-80rem)/2+1.25rem))]"
+      >
         {OFFERS.map((offer, index) => {
           const isCopied = copiedId === offer.id;
 
           return (
             <motion.div
               key={offer.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="rounded-3xl bg-white dark:bg-neutral-900/60 border border-black/10 dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/20 backdrop-blur-xl p-6 sm:p-7 flex flex-col justify-between transition-all shadow-md dark:shadow-xl"
+              data-offer
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.08 }}
+              className="snap-start shrink-0 w-[85vw] sm:w-[420px] rounded-[28px] bg-white dark:bg-[#111217] border border-black/[0.07] dark:border-white/[0.07] hover:border-credvert-gold/40 p-6 sm:p-7 flex flex-col justify-between transition-colors"
             >
               <div>
                 {/* Meta line */}

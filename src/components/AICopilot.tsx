@@ -172,20 +172,20 @@ const SCENARIOS: Scenario[] = [
   },
 ];
 
-export function AICopilot() {
+export function AICopilot({ embedded = false }: { embedded?: boolean }) {
   const [activeScenario, setActiveScenario] = useState<Scenario>(SCENARIOS[0]);
 
   return (
-    <section id="ai-copilot" className="py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id={embedded ? undefined : 'ai-copilot'} className={embedded ? 'relative' : 'py-20 md:py-28 relative'}>
+      <div className={embedded ? '' : 'max-w-7xl mx-auto px-4 sm:px-6'}>
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={embedded ? 'hidden' : 'text-center max-w-3xl mx-auto mb-16'}>
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-credvert-gold/15 border border-credvert-gold/30 text-xs font-mono font-semibold text-credvert-goldDark dark:text-credvert-goldLight mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             <span>FRONTIER AI ARCHITECTURE</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-neutral-900 dark:text-white tracking-tight mb-4">
-            <AppleWordReveal text="Credvert AI — Autonomous Credit Copilot" />
+            <AppleWordReveal text="credVert. Copilot" />
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base leading-relaxed font-sans">
             Powered by <strong className="text-neutral-900 dark:text-white font-semibold">Anthropic Claude 3.5 Sonnet</strong> and
@@ -201,7 +201,7 @@ export function AICopilot() {
             <div className="flex flex-wrap items-center gap-2.5">
               <span className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10B981]" />
-                Claude 3.5 Sonnet Active
+                credVert. Copilot online
               </span>
               <span className="px-2.5 py-0.5 rounded-full bg-neutral-100 dark:bg-white/5 border border-black/5 dark:border-white/10 text-[11px] text-neutral-600 dark:text-neutral-400 font-medium">
                 Function Calling Ready
@@ -296,7 +296,7 @@ export function AICopilot() {
               <strong>Architecture:</strong> Hybrid Edge-RAM Tokenizer + Cloud LLM
             </div>
             <div>
-              <strong>Reasoning Engine:</strong> Claude 3.5 Native Tool Use
+              <strong>Reasoning:</strong> Multi-step tool calling
             </div>
             <div>
               <strong>Compliance:</strong> DPDP Act 2023 & RBI Vault Guidelines

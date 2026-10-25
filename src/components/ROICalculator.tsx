@@ -42,7 +42,13 @@ const SLIDERS: SliderConfig[] = [
   { id: 'utilities', label: 'Utilities, Bills & Insurance', min: 0, max: 40000, step: 1000, hint: 'Electricity, Broadband, Recharges' },
 ];
 
-export default function ROICalculator({ onSelectCard }: { onSelectCard?: (slug: string) => void }) {
+export default function ROICalculator({
+  onSelectCard,
+  embedded = false,
+}: {
+  onSelectCard?: (slug: string) => void;
+  embedded?: boolean;
+}) {
   const [spends, setSpends] = useState<CalculatorSpendState>(DEFAULT_SPENDS);
   const [expandedAll, setExpandedAll] = useState(false);
 
@@ -62,12 +68,12 @@ export default function ROICalculator({ onSelectCard }: { onSelectCard?: (slug: 
   const totalAnnualSpend = totalMonthlySpend * 12;
 
   return (
-    <section id="calculator" className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Background radial glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-credvert-gold/[0.04] rounded-full blur-[140px] pointer-events-none" />
-
+    <section
+      id={embedded ? undefined : 'calculator'}
+      className={embedded ? 'relative' : 'relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'}
+    >
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16">
+      <div className={embedded ? 'hidden' : 'text-center max-w-3xl mx-auto mb-16'}>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
