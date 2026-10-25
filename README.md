@@ -107,7 +107,8 @@ You can also directly open `index.html` in any modern web browser (Google Chrome
 ---
 
 ## ⚖️ Legal & Compliance
-- **Designated Grievance Redressal Officer**: Jay Chauhan (`grievance@credvert.app`)
-- **Support**: `support@credvert.app`
+- **Website**: [credvert.tech](https://credvert.tech)
+- **Designated Grievance Redressal Officer**: Jay Chauhan (`grievance@credvert.tech`)
+- **Support**: `support@credvert.tech`
 - **Location**: Ahmedabad, Gujarat, India
 - **Compliance**: DPDP Act 2023, RBI Digital Lending & Card Vault Guidelines.
