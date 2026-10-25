@@ -13,12 +13,12 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#F8F7F4] dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       {/* Top Header */}
-      <div className="max-w-4xl mx-auto pb-8 border-b border-white/10 flex items-center justify-between">
+      <div className="max-w-4xl mx-auto pb-8 border-b border-black/10 dark:border-white/10 flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-white transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-mono font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Credvert Home</span>
@@ -31,7 +31,7 @@ export default function TermsPage() {
             height={24}
             className="w-6 h-6"
           />
-          <span className="text-xs font-mono text-neutral-400 uppercase tracking-wider">
+          <span className="text-xs font-mono text-neutral-600 dark:text-neutral-400 font-bold uppercase tracking-wider">
             Terms of Service
           </span>
         </div>
@@ -40,26 +40,26 @@ export default function TermsPage() {
       {/* Main Content */}
       <article className="max-w-4xl mx-auto py-12 space-y-10 font-sans">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-display font-bold text-white mb-2">
+          <h1 className="text-3xl sm:text-4xl font-display font-extrabold text-neutral-900 dark:text-white mb-2">
             Terms and Conditions of Service
           </h1>
-          <p className="text-xs font-mono text-neutral-400">
+          <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400">
             Last Updated: October 24, 2026 • Effective Date: October 2026
           </p>
         </div>
 
         <section className="space-y-4">
-          <h2 className="text-xl font-display font-semibold text-white">1. Acceptance of Terms</h2>
-          <p className="text-sm text-neutral-400 leading-relaxed">
-            By accessing or using the website at <strong className="text-white">https://credvert.tech</strong>,
+          <h2 className="text-xl font-display font-bold text-neutral-900 dark:text-white">1. Acceptance of Terms</h2>
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            By accessing or using the website at <strong className="text-neutral-900 dark:text-white">https://credvert.tech</strong>,
             or downloading and using the Credvert mobile applications, you agree to be bound by these Terms and
             Conditions and our Privacy Policy. If you do not agree, do not use the services.
           </p>
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-xl font-display font-semibold text-white">2. Nature of Services</h2>
-          <p className="text-sm text-neutral-400 leading-relaxed">
+          <h2 className="text-xl font-display font-bold text-neutral-900 dark:text-white">2. Nature of Services</h2>
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
             Credvert provides informational tools, algorithms, and calculators to assist users in understanding
             credit card reward multiplier structures, milestone thresholds, foreign exchange markups, and lounge
             benefits available in India.
@@ -67,11 +67,11 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-xl font-display font-semibold text-white">
+          <h2 className="text-xl font-display font-bold text-neutral-900 dark:text-white">
             3. Disclaimer of Financial & Investment Advice
           </h2>
-          <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300 leading-relaxed flex items-start gap-3">
-            <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-300 leading-relaxed flex items-start gap-3">
+            <ShieldAlert className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
             <div>
               Credvert is not an RBI-registered NBFC, commercial bank, payment system operator, or SEBI-registered
               investment advisor. All content, recommendations, rankings, and calculations provided on the platform
@@ -82,10 +82,10 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-xl font-display font-semibold text-white">
+          <h2 className="text-xl font-display font-bold text-neutral-900 dark:text-white">
             4. Intellectual Property & Fair Use of Trademarks
           </h2>
-          <p className="text-sm text-neutral-400 leading-relaxed">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
             All bank names, card product titles, logos, and trademarks (including but not limited to HDFC Bank,
             Infinia, SBI Card, Axis Bank, Atlas, ICICI Bank, Emeralde, American Express, and IDFC FIRST Bank) are the
             exclusive property of their respective owners. Their display on Credvert constitutes nominative fair use
@@ -94,8 +94,8 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-xl font-display font-semibold text-white">5. Governing Law & Jurisdiction</h2>
-          <p className="text-sm text-neutral-400 leading-relaxed">
+          <h2 className="text-xl font-display font-bold text-neutral-900 dark:text-white">5. Governing Law & Jurisdiction</h2>
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
             These Terms shall be governed by and construed in accordance with the laws of India. Any disputes
             arising under or in connection with these Terms shall be subject to the exclusive jurisdiction of the
             competent courts in Ahmedabad, Gujarat, India.
@@ -103,10 +103,10 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-xl font-display font-semibold text-white">6. Contact Information</h2>
-          <p className="text-sm text-neutral-400 leading-relaxed">
+          <h2 className="text-xl font-display font-bold text-neutral-900 dark:text-white">6. Contact Information</h2>
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
             For questions regarding these Terms, contact our legal counsel at{' '}
-            <a href="mailto:legal@credvert.tech" className="text-credvert-gold hover:underline">
+            <a href="mailto:legal@credvert.tech" className="text-credvert-goldDark dark:text-credvert-gold font-bold hover:underline">
               legal@credvert.tech
             </a>{' '}
             or write to Jay Chauhan, Credvert Technologies, Ahmedabad, Gujarat, India.

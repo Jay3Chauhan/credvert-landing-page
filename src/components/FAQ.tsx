@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HelpCircle, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { playHapticFeedback } from '@/lib/sound';
+import { AppleWordReveal } from '@/components/ui/AppleText';
 
 interface FAQItem {
   id: string;
@@ -44,7 +45,7 @@ const FAQS: FAQItem[] = [
       <span>
         Yes, unconditionally. Under the DPDP Act 2023, GDPR and CCPA you have an absolute Right to
         Erasure. Go to <em>Account → Delete Account</em> in-app, or use our{' '}
-        <Link href="/deletion" className="text-credvert-gold hover:underline">
+        <Link href="/deletion" className="text-credvert-goldDark dark:text-credvert-gold underline font-semibold">
           online deletion portal
         </Link>
         . All records, cards, and anonymized hashes are permanently purged within 24 hours.
@@ -62,9 +63,9 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative py-28 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <section id="faq" className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
       {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/[0.02] rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-amber-400/[0.04] dark:bg-white/[0.02] rounded-full blur-[140px] pointer-events-none" />
 
       {/* Header */}
       <div className="text-center mb-16">
@@ -73,31 +74,19 @@ export default function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300 text-xs font-mono font-medium tracking-wide mb-4"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-200/60 dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-neutral-800 dark:text-neutral-300 text-xs font-mono font-medium tracking-wide mb-4 shadow-sm"
         >
           <HelpCircle className="w-3.5 h-3.5 text-credvert-gold" />
           <span>HELP CENTER & PROTOCOL SPECIFICATIONS</span>
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-white mb-4"
-        >
-          Frequently Asked Questions
-        </motion.h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-semibold tracking-tight text-neutral-900 dark:text-white mb-4">
+          <AppleWordReveal text="Frequently Asked Questions" />
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-base sm:text-lg text-neutral-400 font-sans"
-        >
+        <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
           Everything you need to know about Credvert’s mathematical optimization, privacy model, and card coverage.
-        </motion.p>
+        </p>
       </div>
 
       {/* Accordion list */}
@@ -112,7 +101,7 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="rounded-2xl border bg-neutral-900/40 border-white/[0.08] hover:border-white/15 transition-all overflow-hidden backdrop-blur-xl"
+              className="rounded-3xl border bg-white dark:bg-neutral-900/40 border-black/10 dark:border-white/[0.08] hover:border-black/20 dark:hover:border-white/15 transition-all overflow-hidden backdrop-blur-xl shadow-sm"
             >
               <button
                 onClick={() => toggle(faq.id)}
@@ -120,12 +109,14 @@ export default function FAQ() {
                 aria-controls={`faq-answer-${faq.id}`}
                 className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
               >
-                <span className="text-base sm:text-lg font-display font-semibold text-white">
+                <span className="text-base sm:text-lg font-display font-bold text-neutral-900 dark:text-white">
                   {faq.question}
                 </span>
                 <div
-                  className={`w-8 h-8 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                    isOpen ? 'rotate-180 bg-credvert-gold/15 border-credvert-gold/30 text-credvert-gold' : 'text-neutral-400'
+                  className={`w-9 h-9 rounded-full bg-neutral-100 dark:bg-white/[0.04] border border-black/10 dark:border-white/10 flex items-center justify-center shrink-0 transition-transform duration-300 ${
+                    isOpen
+                      ? 'rotate-180 bg-credvert-gold/20 border-credvert-gold/50 text-credvert-goldDark dark:text-credvert-gold'
+                      : 'text-neutral-500 dark:text-neutral-400'
                   }`}
                 >
                   <ChevronDown className="w-4 h-4" />
@@ -141,7 +132,7 @@ export default function FAQ() {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <div className="px-6 pb-6 text-sm text-neutral-400 leading-relaxed font-sans border-t border-white/[0.04] pt-4">
+                    <div className="px-6 pb-6 text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans border-t border-black/5 dark:border-white/[0.04] pt-4">
                       {faq.answer}
                     </div>
                   </motion.div>

@@ -16,6 +16,7 @@ import ComparisonDock from '@/components/ComparisonDock';
 import DownloadModal from '@/components/DownloadModal';
 import Toast, { ToastMessage } from '@/components/Toast';
 import { playHapticFeedback } from '@/lib/sound';
+import { AppleWordReveal } from '@/components/ui/AppleText';
 
 export default function HomePage() {
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
@@ -57,7 +58,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="relative min-h-screen bg-neutral-950 text-neutral-100 flex flex-col selection:bg-credvert-gold/30 selection:text-white">
+    <main className="relative min-h-screen bg-[#F8F7F4] dark:bg-[#07090D] text-neutral-900 dark:text-neutral-100 flex flex-col selection:bg-credvert-gold/30 selection:text-neutral-900 dark:selection:text-white transition-colors duration-300">
       {/* Toast Notifications */}
       <Toast toasts={toasts} onDismiss={(id) => setToasts((prev) => prev.filter((t) => t.id !== id))} />
 
@@ -115,15 +116,15 @@ export default function HomePage() {
 
       {/* Pre-Footer Final Download Banner */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="relative rounded-3xl overflow-hidden border border-credvert-gold/30 bg-gradient-to-b from-neutral-900/90 to-neutral-950/95 p-8 sm:p-14 text-center shadow-2xl backdrop-blur-2xl">
+        <div className="relative rounded-3xl overflow-hidden border border-black/10 dark:border-credvert-gold/30 bg-white dark:bg-gradient-to-b dark:from-neutral-900/90 dark:to-neutral-950/95 p-8 sm:p-14 text-center shadow-xl dark:shadow-2xl backdrop-blur-2xl">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-credvert-gold/15 rounded-full blur-3xl pointer-events-none" />
-          <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight mb-4">
-            The Right Card.{' '}
-            <span className="bg-gradient-to-r from-credvert-gold via-credvert-goldLight to-amber-200 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-neutral-900 dark:text-white tracking-tight mb-4">
+            <AppleWordReveal text="The Right Card." />{' '}
+            <span className="bg-gradient-to-r from-credvert-gold via-amber-500 to-amber-600 dark:from-credvert-gold dark:via-credvert-goldLight dark:to-amber-200 bg-clip-text text-transparent">
               Every Checkout.
             </span>
           </h2>
-          <p className="max-w-xl mx-auto text-neutral-400 text-sm sm:text-base mb-8">
+          <p className="max-w-xl mx-auto text-neutral-600 dark:text-neutral-400 text-sm sm:text-base mb-8 font-sans">
             Join 45,000+ smart Indian cardholders maximizing every rupee with Credvert’s on-device
             intelligence engine.
           </p>
@@ -133,7 +134,7 @@ export default function HomePage() {
                 playHapticFeedback('medium');
                 setDownloadModalOpen(true);
               }}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-credvert-gold to-credvert-goldLight text-neutral-950 font-bold text-sm hover:brightness-110 shadow-xl shadow-credvert-gold/20 transition-all"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-credvert-gold to-credvert-goldLight text-neutral-950 font-bold text-sm hover:brightness-110 shadow-xl shadow-credvert-gold/25 transition-all"
             >
               Get Started Free
             </button>
@@ -141,7 +142,7 @@ export default function HomePage() {
               href="https://github.com/Jay3Chauhan/CreditVance"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] text-white font-medium text-sm transition-all"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-neutral-100 hover:bg-neutral-200 dark:bg-white/[0.04] border border-black/10 dark:border-white/10 dark:hover:bg-white/[0.08] text-neutral-900 dark:text-white font-semibold text-sm transition-all shadow-sm"
             >
               Explore Open Source Repo
             </a>

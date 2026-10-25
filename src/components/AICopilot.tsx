@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { Sparkles, Bot, User, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
-import { soundManager } from '@/lib/sound';
+import { playHapticFeedback } from '@/lib/sound';
+import { AppleWordReveal } from '@/components/ui/AppleText';
 
 interface Scenario {
   id: string;
@@ -43,9 +44,8 @@ const SCENARIOS: Scenario[] = [
     body: (
       <>
         <p className="mb-2">
-          <strong>1. HDFC Infinia (Best Value):</strong> Book via SmartBuy flights for{' '}
-          <strong>5X Reward Points (16.6% effective return)</strong>. You generate 14,166 points worth ₹14,166 when
-          transferred 1:1 to Singapore KrisFlyer or booked on flights.
+          <strong>1. Infinia SmartBuy:</strong> Book through the SmartBuy portal to unlock a 5X reward multiplier (16.6% net return).
+          ₹85,000 earns ~14,166 Reward Points, directly redeemable 1:1 for Singapore Airlines KrisFlyer miles or luxury hotel stays.
         </p>
         <p className="mb-2">
           <strong>2. Daily Cap Alert:</strong> Infinia SmartBuy has a calendar daily cap of 7,500 accelerated points.
@@ -99,80 +99,73 @@ const SCENARIOS: Scenario[] = [
     ),
   },
   {
-    id: 'audit',
-    label: '🔍 Audit June Statement for Hidden Fees',
-    query: 'Audit my latest June statement for unexpected fees, interest, and missed rewards.',
+    id: 'forex',
+    label: '🌏 $1,500 Bali Hotel Spend with Forex',
+    query:
+      "I'm paying $1,500 (approx ₹1,26,000) for a resort in Bali. Which card avoids high forex markup while still earning rewards?",
     tools: [
       {
         icon: '⚙️',
-        text: 'Tool Invoked: vision_ocr.parse_statement({ period: "June 2026", bank: "HDFC Bank" })',
+        text: 'Tool Invoked: forex.calculate_net_markup({ card: "idfc-wealth", fee_percent: 1.5, gst: 18 })',
       },
       {
-        icon: '⚠️',
-        text: 'Detected: ₹1,450 IGST + Forex markup on Spotify US & AWS subscriptions.',
+        icon: '📊',
+        text: 'Calculated: IDFC FIRST Wealth = 1.5% markup + 18% GST = 1.77% total cost. Net return = 2.5% RPs - 1.77% = +0.73% net profit.',
       },
       {
         icon: '⚡',
-        text: 'Tool Invoked: advisor.recommend_alternative({ category: "international_saas", spend: 41200 })',
+        text: 'Tool Invoked: forex.calculate_net_markup({ card: "sbi-cashback", fee_percent: 3.5, gst: 18 })',
       },
     ],
-    title: '⚠️ Audit Findings: ₹1,450 Unnecessary Forex Fees Detected',
+    title: '🏆 Optimal Strategy: IDFC FIRST Wealth (1.5% Forex) or ICICI Emeralde',
     metrics: [
-      { val: '₹1,450', lbl: 'Wasted Forex Markup' },
-      { val: '2', lbl: 'Excluded Spend Categories' },
-      { val: '₹38,200', lbl: 'Remaining for Fee Waiver' },
+      { val: '+₹920', lbl: 'Net Gain After Forex & GST' },
+      { val: '1.5% + GST', lbl: 'Ultra-Low Forex Markup' },
+      { val: '₹0 Lost', lbl: 'Protected Against Surcharges' },
     ],
     body: (
       <>
         <p className="mb-2">
-          <strong>1. Forex Leakage:</strong> Your AWS cloud hosting ($499) was billed in USD with a 2% bank markup + 18%
-          GST (2.36% net loss). Routing this via an ICICI Emeralde (1.5% markup) or zero-forex card saves ₹960/month.
-        </p>
-        <p className="mb-2">
-          <strong>2. Jewellery Exclusion:</strong> ₹45,000 spent on Tanishq was classified under MCC 5094, which HDFC
-          excluded from reward points as of latest circular.
+          <strong>1. Beware the 4.13% Forex Trap:</strong> Standard cards like SBI Cashback charge 3.5% forex markup + 18% GST = 4.13% penalty,
+          wiping out base cashback completely and causing a net loss of ₹5,200.
         </p>
         <p>
-          <strong>3. Milestone Status:</strong> You are ₹38,200 away from your ₹10L annual fee waiver with 42 days left
-          in your card anniversary.
+          <strong>2. IDFC FIRST Wealth / ICICI Emeralde Advantage:</strong> IDFC charges only 1.5% markup (1.77% effective).
+          Combined with 10X reward points on spends exceeding ₹30k/month, international transactions actually remain net profitable!
         </p>
       </>
     ),
   },
   {
-    id: 'lounge',
-    label: '🛋️ Delhi Terminal 3 Lounge Guests',
+    id: 'neucoins',
+    label: '⚡ ₹8,000 Groceries on Tata Neu App',
     query:
-      'Flying international from Delhi Terminal 3 tonight with my spouse and child. Can all 3 of us enter the lounge for free?',
+      'Buying ₹8,000 groceries on BigBasket via Tata Neu app. How do I get maximum NeuCoins?',
     tools: [
       {
         icon: '⚙️',
-        text: 'Tool Invoked: lounge_db.get_access_rules({ airport: "DEL", terminal: "T3 International", cards: ["HDFC Infinia Metal", "Axis Atlas"] })',
+        text: 'Tool Invoked: catalog.check_co_branded({ card: "tata-neu-infinity", app: "Tata Neu", merchant: "BigBasket" })',
       },
       {
         icon: '📊',
-        text: 'Rule Evaluated: Infinia Metal Priority Pass permits primary + 1 complimentary guest.',
-      },
-      {
-        icon: '⚡',
-        text: 'Rule Evaluated: Axis Atlas DreamFolks requires ₹15,000 spend in preceding quarter.',
+        text: 'Calculated: 5% NeuCoins on Tata Neu Infinity + 5% NeuPass member bonus = 10% total NeuCoins (800 NeuCoins = ₹800 value).',
       },
     ],
-    title: '🛋️ Lounge Access Strategy: Encalm Privé Delhi T3',
+    title: '🏆 Optimal Strategy: Tata Neu Infinity HDFC Card on Tata Neu App',
     metrics: [
-      { val: '2 Adults Free', lbl: 'Infinia Priority Pass' },
-      { val: 'Child < 2 Free', lbl: 'Infant Policy' },
-      { val: 'Encalm Privé', lbl: 'Eligible Lounge' },
+      { val: '800 NeuCoins', lbl: 'Total Rewards Earned' },
+      { val: '10.0%', lbl: 'Effective Return Rate' },
+      { val: '1:1 = ₹800', lbl: 'Redemption on Air India / Croma' },
     ],
     body: (
       <>
         <p className="mb-2">
-          <strong>1. Adults (Free):</strong> Your primary HDFC Infinia Priority Pass grants free entry to you and 1
-          accompanying adult guest at Delhi T3 Encalm Privé.
+          <strong>1. Stacked 10% Yield:</strong> Paying via Tata Neu Infinity inside the Neu app delivers 5% base NeuCoins
+          plus 5% NeuPass member privileges, totaling 10% direct value.
         </p>
         <p>
-          <strong>2. Child Policy:</strong> Children under 2 years enter free. If older than 2, use your Add-on Infinia
-          Priority Pass (if issued in advance) or swipe Axis Atlas to avoid paying the walk-in guest fee of ₹2,400 + GST.
+          <strong>2. Direct Redemption:</strong> 800 NeuCoins equal ₹800 directly usable on Air India, Tata 1mg, Croma,
+          or IHCL Taj hotels without any conversion loss.
         </p>
       </>
     ),
@@ -187,37 +180,37 @@ export function AICopilot() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gold/10 border border-gold/30 text-xs font-semibold text-gold-light mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-credvert-gold/15 border border-credvert-gold/30 text-xs font-mono font-semibold text-credvert-goldDark dark:text-credvert-goldLight mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
-            Frontier AI Architecture
+            <span>FRONTIER AI ARCHITECTURE</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-white tracking-tight mb-4">
-            Credvert AI — Autonomous Credit Copilot
+          <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-neutral-900 dark:text-white tracking-tight mb-4">
+            <AppleWordReveal text="Credvert AI — Autonomous Credit Copilot" />
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
-            Powered by <strong className="text-zinc-200">Anthropic Claude 3.5 Sonnet</strong> and on-device privacy
-            tokenization. Ask complex credit card queries in natural language, audit statement fees, and let multi-step
-            tool calling optimize your rewards in real-time.
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base leading-relaxed font-sans">
+            Powered by <strong className="text-neutral-900 dark:text-white font-semibold">Anthropic Claude 3.5 Sonnet</strong> and
+            on-device privacy tokenization. Ask complex credit card queries in natural language, audit statement fees,
+            and let multi-step tool calling optimize your rewards in real-time.
           </p>
         </div>
 
         {/* AI Terminal Card */}
-        <div className="max-w-4xl mx-auto rounded-3xl bg-[#111217]/90 border border-gold/20 shadow-2xl backdrop-blur-2xl p-6 sm:p-10 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto rounded-3xl bg-white dark:bg-[#111217]/90 border border-black/10 dark:border-credvert-gold/20 shadow-xl dark:shadow-2xl backdrop-blur-2xl p-6 sm:p-10 relative overflow-hidden">
           {/* Top Status Header */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10 mb-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-black/10 dark:border-white/10 mb-6">
             <div className="flex flex-wrap items-center gap-2.5">
-              <span className="flex items-center gap-2 text-xs font-semibold text-emerald">
-                <span className="w-2 h-2 rounded-full bg-emerald animate-pulse shadow-[0_0_8px_#10B981]" />
+              <span className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10B981]" />
                 Claude 3.5 Sonnet Active
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-zinc-400 font-medium">
+              <span className="px-2.5 py-0.5 rounded-full bg-neutral-100 dark:bg-white/5 border border-black/5 dark:border-white/10 text-[11px] text-neutral-600 dark:text-neutral-400 font-medium">
                 Function Calling Ready
               </span>
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald/10 border border-emerald/30 text-[11px] text-emerald font-semibold">
+              <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold font-mono">
                 ✓ DPDP 2023 Tokenized (0 PII to Cloud)
               </span>
             </div>
-            <div className="font-mono text-xs text-gold-light bg-gold/10 px-2.5 py-1 rounded-md border border-gold/20">
+            <div className="font-mono text-xs text-credvert-goldDark dark:text-credvert-goldLight bg-credvert-gold/10 px-2.5 py-1 rounded-lg border border-credvert-gold/30">
               ⚡ 240ms Inference
             </div>
           </div>
@@ -228,13 +221,13 @@ export function AICopilot() {
               <button
                 key={s.id}
                 onClick={() => {
-                  soundManager.playClick();
+                  playHapticFeedback('light');
                   setActiveScenario(s);
                 }}
-                className={`px-3.5 py-2 rounded-full text-xs font-medium transition-all ${
+                className={`px-3.5 py-2 rounded-2xl text-xs font-medium transition-all ${
                   activeScenario.id === s.id
-                    ? 'bg-gradient-to-r from-gold-light/20 via-gold/20 to-gold-deep/20 text-white border border-gold shadow-[0_2px_12px_rgba(212,168,83,0.2)] font-semibold'
-                    : 'bg-white/5 text-zinc-400 hover:text-white border border-white/5 hover:border-white/15'
+                    ? 'bg-credvert-gold/20 text-neutral-900 dark:text-white border border-credvert-gold shadow-sm font-semibold'
+                    : 'bg-neutral-100 dark:bg-white/5 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white border border-black/5 dark:border-white/5 hover:border-black/15 dark:hover:border-white/15'
                 }`}
               >
                 {s.label}
@@ -243,19 +236,19 @@ export function AICopilot() {
           </div>
 
           {/* Interactive Chat Thread */}
-          <div className="space-y-6 bg-black/40 border border-white/5 rounded-2xl p-6 mb-6">
+          <div className="space-y-6 bg-neutral-50 dark:bg-black/40 border border-black/5 dark:border-white/5 rounded-3xl p-6 mb-6">
             {/* User Message */}
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-xs font-bold text-zinc-300 flex-shrink-0">
+              <div className="w-8 h-8 rounded-xl bg-neutral-200 dark:bg-white/10 flex items-center justify-center text-xs font-bold text-neutral-700 dark:text-neutral-300 flex-shrink-0">
                 <User className="w-4 h-4" />
               </div>
-              <div className="flex-1 bg-white/[0.04] border border-white/5 rounded-2xl p-4 text-sm text-zinc-200 leading-relaxed">
+              <div className="flex-1 bg-white dark:bg-white/[0.04] border border-black/5 dark:border-white/5 rounded-2xl p-4 text-sm text-neutral-800 dark:text-neutral-200 leading-relaxed shadow-sm">
                 {activeScenario.query}
               </div>
             </div>
 
             {/* Agent Tool Invocations */}
-            <div className="ml-11 border-l-2 border-gold/60 pl-4 space-y-2 py-1 font-mono text-xs text-zinc-400">
+            <div className="ml-11 border-l-2 border-credvert-gold/60 pl-4 space-y-2 py-1 font-mono text-xs text-neutral-600 dark:text-neutral-300">
               {activeScenario.tools.map((t, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <span>{t.icon}</span>
@@ -266,25 +259,31 @@ export function AICopilot() {
 
             {/* AI Bot Response */}
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-light to-gold-deep flex items-center justify-center text-xs font-bold text-obsidian shadow-gold flex-shrink-0">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-credvert-gold to-credvert-goldLight flex items-center justify-center text-xs font-bold text-neutral-950 shadow-md flex-shrink-0">
                 <Bot className="w-4 h-4" />
               </div>
               <div className="flex-1 space-y-4">
                 {/* Recommendation Highlight Box */}
-                <div className="rounded-xl bg-gradient-to-r from-gold/15 to-emerald/10 border border-gold/30 p-4">
-                  <h4 className="text-sm sm:text-base font-bold text-white mb-3">{activeScenario.title}</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-white/10">
+                <div className="rounded-2xl bg-amber-500/10 dark:bg-gradient-to-r dark:from-credvert-gold/15 dark:to-emerald-500/10 border border-credvert-gold/40 p-4 shadow-sm">
+                  <h4 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white mb-3">
+                    {activeScenario.title}
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-black/10 dark:border-white/10">
                     {activeScenario.metrics.map((m, idx) => (
                       <div key={idx}>
-                        <span className="block text-lg font-bold font-display text-gold-light">{m.val}</span>
-                        <span className="text-[10px] uppercase font-semibold text-zinc-400">{m.lbl}</span>
+                        <span className="block text-lg font-bold font-display text-credvert-goldDark dark:text-credvert-goldLight">
+                          {m.val}
+                        </span>
+                        <span className="text-[10px] uppercase font-semibold text-neutral-500 dark:text-neutral-400 font-mono">
+                          {m.lbl}
+                        </span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Detailed Strategy Body */}
-                <div className="text-xs sm:text-sm text-zinc-300 leading-relaxed bg-white/[0.02] border border-white/5 rounded-xl p-4">
+                <div className="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed bg-white dark:bg-white/[0.02] border border-black/5 dark:border-white/5 rounded-2xl p-4 shadow-sm">
                   {activeScenario.body}
                 </div>
               </div>
@@ -292,7 +291,7 @@ export function AICopilot() {
           </div>
 
           {/* Architecture Footer */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10 text-xs text-zinc-500">
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-black/10 dark:border-white/10 text-xs text-neutral-500 dark:text-neutral-400 font-mono">
             <div>
               <strong>Architecture:</strong> Hybrid Edge-RAM Tokenizer + Cloud LLM
             </div>
