@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://credvert.app/sitemap.xml
+Sitemap: https://credvert.tech/sitemap.xml
