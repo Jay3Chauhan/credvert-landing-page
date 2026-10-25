@@ -295,9 +295,54 @@ body::before {
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.85rem;
   text-decoration: none;
   flex-shrink: 0;
+}
+
+.brand-mark-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--gold-glow);
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s;
+  flex-shrink: 0;
+  display: block;
+}
+
+.brand-logo:hover .brand-mark-img {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 6px 28px var(--gold-glow-lg);
+}
+
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+}
+
+.brand-wordmark-img {
+  height: 26px;
+  width: auto;
+  max-width: 140px;
+  display: block;
+  object-fit: contain;
+  transition: filter 0.25s var(--ease-smooth);
+}
+
+[data-theme="light"] .brand-wordmark-img {
+  filter: brightness(0.18) contrast(1.2);
+}
+
+.brand-text-block .sub {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-top: 3px;
+  font-family: var(--font-body);
 }
 
 .brand-icon {
