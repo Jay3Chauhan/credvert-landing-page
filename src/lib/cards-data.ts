@@ -1,4 +1,5 @@
 import { CreditCard } from '@/types';
+import { getBankSymbolUrl } from '@/lib/bank-logos';
 
 export const CREDVERT_CARDS: CreditCard[] = [
   {
@@ -8,7 +9,7 @@ export const CREDVERT_CARDS: CreditCard[] = [
     displayName: 'Infinia Metal',
     bank: 'HDFC Bank',
     bankSlug: 'hdfc',
-    bankLogo: '/assets/banks/hdfc.svg',
+    bankLogo: getBankSymbolUrl('hdfc'),
     network: 'Visa Infinite / Diners Club',
     networkLogo: '/assets/network-logo/visa.svg',
     skin: 'aurum',
@@ -62,7 +63,7 @@ export const CREDVERT_CARDS: CreditCard[] = [
     displayName: 'SBI Cashback',
     bank: 'State Bank of India',
     bankSlug: 'sbi',
-    bankLogo: '/assets/banks/sbi.svg',
+    bankLogo: getBankSymbolUrl('sbin'),
     network: 'Visa Signature',
     networkLogo: '/assets/network-logo/visa.svg',
     skin: 'emerald',
@@ -110,7 +111,7 @@ export const CREDVERT_CARDS: CreditCard[] = [
     displayName: 'Axis Atlas',
     bank: 'Axis Bank',
     bankSlug: 'axis',
-    bankLogo: '/assets/banks/axis.svg',
+    bankLogo: getBankSymbolUrl('utib'),
     network: 'Mastercard World',
     networkLogo: '/assets/network-logo/Mastercard.svg',
     skin: 'sapphire',
@@ -161,7 +162,7 @@ export const CREDVERT_CARDS: CreditCard[] = [
     displayName: 'Amex Plat Travel',
     bank: 'American Express',
     bankSlug: 'amex',
-    bankLogo: '/assets/banks/amex.svg',
+    bankLogo: getBankSymbolUrl('amex'),
     network: 'American Express',
     networkLogo: '/assets/network-logo/amex.svg',
     skin: 'titanium',
@@ -210,7 +211,7 @@ export const CREDVERT_CARDS: CreditCard[] = [
     displayName: 'Emeralde Private',
     bank: 'ICICI Bank',
     bankSlug: 'icici',
-    bankLogo: '/assets/banks/icici.svg',
+    bankLogo: getBankSymbolUrl('icic'),
     network: 'Mastercard World Elite',
     networkLogo: '/assets/network-logo/Mastercard.svg',
     skin: 'obsidian',
@@ -263,7 +264,7 @@ export const CREDVERT_CARDS: CreditCard[] = [
     displayName: 'IDFC Wealth',
     bank: 'IDFC FIRST Bank',
     bankSlug: 'idfc',
-    bankLogo: '/assets/banks/idfc.svg',
+    bankLogo: getBankSymbolUrl('idfb'),
     network: 'Visa Infinite',
     networkLogo: '/assets/network-logo/visa.svg',
     skin: 'rosso',
@@ -313,7 +314,7 @@ export const CREDVERT_CARDS: CreditCard[] = [
     displayName: 'Tata Neu Infinity',
     bank: 'HDFC Bank',
     bankSlug: 'hdfc',
-    bankLogo: '/assets/banks/hdfc.svg',
+    bankLogo: getBankSymbolUrl('hdfc'),
     network: 'RuPay / Visa',
     networkLogo: '/assets/network-logo/RuPay.svg',
     skin: 'amethyst',

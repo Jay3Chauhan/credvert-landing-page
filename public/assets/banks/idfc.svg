@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <rect width="100" height="100" rx="18" fill="#9D1C24"/>
-  <!-- IDFC FIRST 4-block motif -->
-  <rect x="24" y="24" width="22" height="22" rx="4" fill="#FFFFFF"/>
-  <rect x="54" y="24" width="22" height="22" rx="4" fill="#F4A934"/>
-  <rect x="24" y="54" width="22" height="22" rx="4" fill="#F4A934"/>
-  <rect x="54" y="54" width="22" height="22" rx="4" fill="#FFFFFF"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="64.027" height="64.027"><g fill="none" fill-rule="evenodd"><path fill="#9d1d27" d="M9.535 73.513h64.027V9.487H9.535Z" style="stroke-width:.458447" transform="translate(-9.535 -9.487)"/><path fill="#fefefe" d="M8.43 8.476H55.5v47.077H8.43V8.477Zm51.035-3.96-55-.003v55h55z"/><path fill="#fefefe" d="M13.465 22.513h37v-9h-37Zm0 28h9v-9h-9Zm0-14h23v-9h-23Z"/></g></svg>

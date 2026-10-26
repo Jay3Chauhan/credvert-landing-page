@@ -126,13 +126,14 @@ export default function CardCatalog({
               <div className="p-6">
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-neutral-100 dark:bg-white/[0.04] border border-black/5 dark:border-white/10 p-2 flex items-center justify-center shrink-0 shadow-sm">
+                    <div className="w-10 h-10 rounded-2xl bg-white dark:bg-white/10 border border-black/5 dark:border-white/10 p-1.5 flex items-center justify-center shrink-0 shadow-sm">
                       <Image
                         src={card.bankLogo}
                         alt={card.bank}
                         width={28}
                         height={28}
-                        className="object-contain"
+                        className="w-full h-full object-contain"
+                        unoptimized
                       />
                     </div>
                     <div>

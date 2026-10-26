@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Copy, Check, Sparkles, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 import { playHapticFeedback } from '@/lib/sound';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { getBankSymbolUrl } from '@/lib/bank-logos';
 
 interface OfferItem {
   id: string;
@@ -12,6 +14,7 @@ interface OfferItem {
   title: string;
   description: string;
   cardName: string;
+  bankSlug: string;
   code: string;
   isAutoCredit?: boolean;
   expires: string;
@@ -24,6 +27,7 @@ const OFFERS: OfferItem[] = [
     title: '20% Instant Discount on Gourmet Dining',
     description: 'Valid on HDFC Infinia & Diners Black. Max ₹1,00,000 discount per calendar month across partner luxury restaurants.',
     cardName: 'HDFC Infinia Metal',
+    bankSlug: 'hdfc',
     code: 'INFINIADINE',
     expires: 'Verified Today',
   },
@@ -33,6 +37,7 @@ const OFFERS: OfferItem[] = [
     title: 'Flat 5% Direct Statement Cashback',
     description: 'SBI Cashback Card. Auto-credited to statement within 2 days — zero coupon required, no minimum bill.',
     cardName: 'SBI Cashback Card',
+    bankSlug: 'sbin',
     code: 'AUTO-CREDIT',
     isAutoCredit: true,
     expires: 'Always Active',
@@ -43,6 +48,7 @@ const OFFERS: OfferItem[] = [
     title: '5X EDGE Miles + 1:2 KrisFlyer Transfer',
     description: 'Axis Atlas Card. Convert EDGE Miles directly to Singapore Airlines KrisFlyer or Accor ALL at 1:2 ratio.',
     cardName: 'Axis Atlas Card',
+    bankSlug: 'utib',
     code: 'ATLASTICKETS',
     expires: 'Verified Today',
   },
@@ -52,6 +58,7 @@ const OFFERS: OfferItem[] = [
     title: 'Buy 1 Get 1 Free Ticket up to ₹750',
     description: 'ICICI Emeralde Private Metal. Valid twice per calendar month for IMAX & premium recliners.',
     cardName: 'ICICI Emeralde Metal',
+    bankSlug: 'icic',
     code: 'EMERALDEBOGO',
     expires: 'Verified Today',
   },
@@ -144,9 +151,21 @@ export default function Offers({ onCopyCode }: { onCopyCode?: (code: string) => 
                 <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 font-sans">
                   {offer.description}
                 </p>
-                <div className="text-xs font-mono text-credvert-goldDark dark:text-credvert-goldLight mb-6 font-semibold">
-                  Eligible:{' '}
-                  <span className="text-neutral-900 dark:text-white font-bold">{offer.cardName}</span>
+                <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-credvert-goldDark dark:text-credvert-goldLight mb-6 font-semibold">
+                  <span>Eligible:</span>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-neutral-100 dark:bg-white/[0.06] text-neutral-900 dark:text-white font-bold border border-black/5 dark:border-white/10">
+                    <span className="w-4 h-4 rounded bg-white p-0.5 flex items-center justify-center shrink-0 shadow-xs">
+                      <Image
+                        src={getBankSymbolUrl(offer.bankSlug)}
+                        alt=""
+                        width={14}
+                        height={14}
+                        className="w-full h-full object-contain"
+                        unoptimized
+                      />
+                    </span>
+                    <span>{offer.cardName}</span>
+                  </span>
                 </div>
               </div>
 

@@ -1,14 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Sparkles, Bot, User, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
 import { playHapticFeedback } from '@/lib/sound';
 import { AppleWordReveal } from '@/components/ui/AppleText';
+import { getBankSymbolUrl } from '@/lib/bank-logos';
 
 interface Scenario {
   id: string;
   label: string;
   query: string;
+  bankSlug?: string;
   tools: Array<{ icon: string; text: string }>;
   title: string;
   metrics: Array<{ val: string; lbl: string }>;
@@ -19,6 +22,7 @@ const SCENARIOS: Scenario[] = [
   {
     id: 'flight',
     label: '✈️ ₹85k Singapore Airlines Flight',
+    bankSlug: 'hdfc',
     query:
       "I'm booking flights to Singapore for ₹85,000 next month. Between my HDFC Infinia, Axis Atlas, and Amex Plat Travel, which card gives me the highest net return and lounge access?",
     tools: [
@@ -62,6 +66,7 @@ const SCENARIOS: Scenario[] = [
   {
     id: 'macbook',
     label: '💻 ₹1.2L MacBook on Amazon vs Apple',
+    bankSlug: 'sbin',
     query:
       "I'm buying a ₹1,20,000 MacBook Pro. Should I buy directly on Apple Store India or on Amazon with SBI Cashback or HDFC Infinia?",
     tools: [
@@ -101,6 +106,7 @@ const SCENARIOS: Scenario[] = [
   {
     id: 'forex',
     label: '🌏 $1,500 Bali Hotel Spend with Forex',
+    bankSlug: 'idfb',
     query:
       "I'm paying $1,500 (approx ₹1,26,000) for a resort in Bali. Which card avoids high forex markup while still earning rewards?",
     tools: [
@@ -139,6 +145,7 @@ const SCENARIOS: Scenario[] = [
   {
     id: 'neucoins',
     label: '⚡ ₹8,000 Groceries on Tata Neu App',
+    bankSlug: 'hdfc',
     query:
       'Buying ₹8,000 groceries on BigBasket via Tata Neu app. How do I get maximum NeuCoins?',
     tools: [
@@ -265,9 +272,23 @@ export function AICopilot({ embedded = false }: { embedded?: boolean }) {
               <div className="flex-1 space-y-4">
                 {/* Recommendation Highlight Box */}
                 <div className="rounded-2xl bg-amber-500/10 dark:bg-gradient-to-r dark:from-credvert-gold/15 dark:to-emerald-500/10 border border-credvert-gold/40 p-4 shadow-sm">
-                  <h4 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white mb-3">
-                    {activeScenario.title}
-                  </h4>
+                  <div className="flex items-center gap-2.5 mb-3">
+                    {activeScenario.bankSlug && (
+                      <span className="w-6 h-6 rounded-md bg-white p-0.5 flex items-center justify-center shrink-0 border border-black/5 shadow-xs">
+                        <Image
+                          src={getBankSymbolUrl(activeScenario.bankSlug)}
+                          alt=""
+                          width={18}
+                          height={18}
+                          className="w-full h-full object-contain"
+                          unoptimized
+                        />
+                      </span>
+                    )}
+                    <h4 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white">
+                      {activeScenario.title}
+                    </h4>
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-black/10 dark:border-white/10">
                     {activeScenario.metrics.map((m, idx) => (
                       <div key={idx}>

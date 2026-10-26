@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { CalendarClock, Cpu, Globe2, Lock, Plane, ShoppingBag, Smartphone, Fuel, Utensils, Trophy } from 'lucide-react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -8,13 +9,14 @@ import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { Stagger, StaggerItem } from '@/components/ui/Reveal';
 import { CountUp } from '@/components/ui/AppleText';
 import { easeOutExpo } from '@/lib/motion';
+import { getBankSymbolUrl } from '@/lib/bank-logos';
 
 const RATES = [
-  { icon: Utensils, label: 'Dining', card: 'HDFC Infinia · SmartBuy', rate: 16.6 },
-  { icon: Plane, label: 'Flights', card: 'Axis Atlas · EDGE Miles', rate: 10 },
-  { icon: ShoppingBag, label: 'Online shopping', card: 'SBI Cashback', rate: 5 },
-  { icon: Smartphone, label: 'UPI on RuPay', card: 'Tata Neu Infinity', rate: 1.5 },
-  { icon: Fuel, label: 'Fuel', card: 'Surcharge waiver only', rate: 1 },
+  { icon: Utensils, label: 'Dining', card: 'HDFC Infinia · SmartBuy', bankSlug: 'hdfc', rate: 16.6 },
+  { icon: Plane, label: 'Flights', card: 'Axis Atlas · EDGE Miles', bankSlug: 'utib', rate: 10 },
+  { icon: ShoppingBag, label: 'Online shopping', card: 'SBI Cashback', bankSlug: 'sbin', rate: 5 },
+  { icon: Smartphone, label: 'UPI on RuPay', card: 'Tata Neu Infinity', bankSlug: 'hdfc', rate: 1.5 },
+  { icon: Fuel, label: 'Fuel', card: 'Surcharge waiver only', bankSlug: null, rate: 1 },
 ];
 
 const tile =
@@ -49,7 +51,21 @@ function RateBars() {
             <div className="min-w-0">
               <div className="flex items-baseline justify-between gap-2 text-sm">
                 <span className="font-semibold text-neutral-900 dark:text-white truncate">{r.label}</span>
-                <span className="text-xs text-neutral-500 dark:text-neutral-500 truncate">{r.card}</span>
+                <span className="text-xs text-neutral-500 dark:text-neutral-500 truncate flex items-center gap-1.5">
+                  {r.bankSlug && (
+                    <span className="w-3.5 h-3.5 rounded bg-white p-0.5 flex items-center justify-center shrink-0 shadow-xs">
+                      <Image
+                        src={getBankSymbolUrl(r.bankSlug)}
+                        alt=""
+                        width={12}
+                        height={12}
+                        className="w-full h-full object-contain"
+                        unoptimized
+                      />
+                    </span>
+                  )}
+                  <span>{r.card}</span>
+                </span>
               </div>
               <div className="mt-1.5 h-2 rounded-full bg-neutral-100 dark:bg-white/[0.06] overflow-hidden">
                 <motion.div

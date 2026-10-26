@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <rect width="100" height="100" rx="18" fill="#97144D"/>
-  <!-- Axis Bank Pyramid "A" Symbol -->
-  <polygon points="50,18 20,80 38,80 50,52 62,80 80,80" fill="#FFFFFF"/>
-  <polygon points="50,30 36,74 46,74 50,62 54,74 64,74" fill="#97144D"/>
-  <polygon points="50,22 80,80 62,80 50,46" fill="#FFFFFF" opacity="0.95"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="81.629" height="70.753"><defs><clipPath id="a"><path d="M27 27h1353.599v939.6H27Z"/></clipPath></defs><g clip-path="url(#a)" style="fill:#00f" transform="matrix(1.25 0 0 -1.25 -108.521 230.868)"><g style="fill:maroon"><path d="M0 0h-20.312l-12.333 21.507h20.309z" style="fill:maroon;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="translate(152.12 128.092)"/></g><g style="fill:maroon"><path d="m0 0 10.185-17.516-22.498-39.086h-20.273Z" style="fill:maroon;fill-opacity:1;fill-rule:nonzero;stroke:none" transform="translate(119.403 184.694)"/></g></g></svg>

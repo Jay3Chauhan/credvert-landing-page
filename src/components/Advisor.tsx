@@ -190,13 +190,16 @@ export function Advisor({ embedded = false }: { embedded?: boolean }) {
 
               {/* Winner Identity */}
               <div className="flex items-center gap-3 mb-6">
-                <Image
-                  src={winner.card.bankLogo}
-                  alt={winner.card.bank}
-                  width={42}
-                  height={42}
-                  className="w-10 h-10 object-contain rounded-xl p-1 bg-white dark:bg-white/10 border border-black/10 dark:border-white/10 flex-shrink-0 shadow-sm"
-                />
+                <div className="w-11 h-11 rounded-2xl bg-white dark:bg-white/10 border border-black/10 dark:border-white/10 p-1.5 flex items-center justify-center shrink-0 shadow-sm">
+                  <Image
+                    src={winner.card.bankLogo}
+                    alt={winner.card.bank}
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-contain"
+                    unoptimized
+                  />
+                </div>
                 <div>
                   <h3 className="text-lg font-bold text-neutral-900 dark:text-white font-display leading-snug">
                     {winner.card.name}

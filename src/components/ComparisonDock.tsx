@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, Check } from 'lucide-react';
 import { CREDVERT_CARDS } from '@/lib/cards-data';
@@ -107,9 +108,18 @@ export default function ComparisonDock({
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
                       transition={springSettle}
-                      className="flex items-center gap-1.5 pl-3 pr-1.5 h-9 rounded-full bg-black/[0.05] dark:bg-white/[0.07] shrink-0"
+                      className="flex items-center gap-2 pl-2 pr-1.5 h-9 rounded-full bg-black/[0.05] dark:bg-white/[0.07] shrink-0"
                     >
-                      <span className="w-2 h-2 rounded-full bg-credvert-gold" />
+                      <span className="w-5 h-5 rounded-full bg-white p-0.5 flex items-center justify-center shrink-0 shadow-xs">
+                        <Image
+                          src={card.bankLogo}
+                          alt=""
+                          width={14}
+                          height={14}
+                          className="w-full h-full object-contain"
+                          unoptimized
+                        />
+                      </span>
                       <span className="text-xs font-semibold text-neutral-800 dark:text-neutral-100 max-w-[88px] sm:max-w-[130px] truncate">
                         {card.name}
                       </span>
@@ -178,8 +188,20 @@ export default function ComparisonDock({
                 <th className="sticky left-0 bg-white dark:bg-obsidian-100 py-3 pr-4 w-40" />
                 {selectedCards.map((c) => (
                   <th key={c.slug} scope="col" className="py-3 px-3 align-bottom">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className="w-6 h-6 rounded-md bg-white p-0.5 flex items-center justify-center shrink-0 border border-black/5 shadow-xs">
+                        <Image
+                          src={c.bankLogo}
+                          alt=""
+                          width={18}
+                          height={18}
+                          className="w-full h-full object-contain"
+                          unoptimized
+                        />
+                      </div>
+                      <div className="text-xs font-normal text-neutral-500 truncate">{c.bank}</div>
+                    </div>
                     <div className="text-[15px] font-semibold text-neutral-900 dark:text-white leading-tight">{c.name}</div>
-                    <div className="text-xs font-normal text-neutral-500 mt-0.5">{c.bank}</div>
                   </th>
                 ))}
               </tr>

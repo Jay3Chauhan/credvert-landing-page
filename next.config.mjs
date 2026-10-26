@@ -4,6 +4,16 @@ const nextConfig = {
   swcMinify: true,
   images: {
     unoptimized: true,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.jsdelivr.net',
+        pathname: '/gh/praveenpuglia/indian-banks/**',
+      },
+    ],
   },
 };
 

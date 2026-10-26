@@ -92,7 +92,9 @@ export default function InteractiveCard() {
             <div aria-hidden className="absolute -right-16 -bottom-24 w-72 h-72 rounded-full border-[28px] border-white/[0.05]" />
             <div className="relative flex items-start justify-between">
               <div className="flex items-center gap-2.5">
-                <Image src={card.bankLogo} alt="" width={30} height={30} className="w-8 h-8 rounded-lg" />
+                <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 shadow-sm">
+                  <Image src={card.bankLogo} alt={card.bank} width={26} height={26} className="w-full h-full object-contain" unoptimized />
+                </div>
                 <div>
                   <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-white/90">{card.bank}</div>
                   <div className="text-[13px] font-semibold text-white">{card.displayName}</div>

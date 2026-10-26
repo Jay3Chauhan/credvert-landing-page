@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ShieldCheck,
@@ -17,6 +18,7 @@ import { parseSMS, SMS_SAMPLES } from '@/lib/sms-engine';
 import { SMSParseResult } from '@/types';
 import { playHapticFeedback } from '@/lib/sound';
 import { AppleWordReveal } from '@/components/ui/AppleText';
+import { getBankSymbolUrl } from '@/lib/bank-logos';
 
 export default function SMSIntelligence({ embedded = false }: { embedded?: boolean }) {
   const [activeSample, setActiveSample] = useState<string>('sample-1');
@@ -100,10 +102,10 @@ export default function SMSIntelligence({ embedded = false }: { embedded?: boole
           {/* Sample Selector Pills */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {[
-              { id: 'sample-1', label: 'HDFC Bank', badge: 'Zomato' },
-              { id: 'sample-2', label: 'SBI Card', badge: 'Amazon' },
-              { id: 'sample-3', label: 'Axis Bank', badge: 'MakeMyTrip' },
-              { id: 'sample-4', label: 'ICICI Bank', badge: 'Apple US$' },
+              { id: 'sample-1', label: 'HDFC Bank', slug: 'hdfc', badge: 'Zomato' },
+              { id: 'sample-2', label: 'SBI Card', slug: 'sbin', badge: 'Amazon' },
+              { id: 'sample-3', label: 'Axis Bank', slug: 'utib', badge: 'MakeMyTrip' },
+              { id: 'sample-4', label: 'ICICI Bank', slug: 'icic', badge: 'Apple US$' },
             ].map((sample) => (
               <button
                 key={sample.id}
@@ -114,8 +116,20 @@ export default function SMSIntelligence({ embedded = false }: { embedded?: boole
                     : 'bg-white dark:bg-white/[0.02] border-black/10 dark:border-white/[0.06] text-neutral-600 dark:text-neutral-400 hover:border-black/20 dark:hover:border-white/20'
                 }`}
               >
-                <div className="font-semibold text-neutral-900 dark:text-white truncate">{sample.label}</div>
-                <div className="text-[11px] text-neutral-500 dark:text-neutral-400 truncate">{sample.badge}</div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-5 h-5 rounded-md bg-white p-0.5 flex items-center justify-center shrink-0 border border-black/5 shadow-xs">
+                    <Image
+                      src={getBankSymbolUrl(sample.slug)}
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="w-full h-full object-contain"
+                      unoptimized
+                    />
+                  </span>
+                  <div className="font-semibold text-neutral-900 dark:text-white truncate">{sample.label}</div>
+                </div>
+                <div className="text-[11px] text-neutral-500 dark:text-neutral-400 pl-7 truncate">{sample.badge}</div>
               </button>
             ))}
           </div>
@@ -194,9 +208,18 @@ export default function SMSIntelligence({ embedded = false }: { embedded?: boole
                     <span className="text-[11px] font-mono uppercase text-neutral-500 dark:text-neutral-400 block mb-1">
                       Issuing Bank
                     </span>
-                    <span className="text-sm font-semibold text-neutral-900 dark:text-white flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-credvert-gold shrink-0" />
-                      {parseResult.bank}
+                    <span className="text-sm font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
+                      <span className="w-5 h-5 rounded-md bg-white p-0.5 flex items-center justify-center shrink-0 border border-black/5 shadow-xs">
+                        <Image
+                          src={getBankSymbolUrl(parseResult.bank)}
+                          alt=""
+                          width={16}
+                          height={16}
+                          className="w-full h-full object-contain"
+                          unoptimized
+                        />
+                      </span>
+                      <span>{parseResult.bank}</span>
                     </span>
                   </div>
                   <div className="p-4 rounded-2xl bg-neutral-50 dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06]">
