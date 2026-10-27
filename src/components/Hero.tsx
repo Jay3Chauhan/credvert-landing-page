@@ -43,7 +43,7 @@ const CHIPS: Chip[] = [
   },
   {
     id: 'best',
-    className: 'left-[-2%] sm:left-[3%] top-[58%]',
+    className: 'left-[12%] sm:left-[3%] top-[58%]',
     depth: 2.2,
     icon: <Crown className="w-4 h-4" />,
     iconTint: 'bg-credvert-gold/20 text-credvert-goldLight',
@@ -65,7 +65,7 @@ const CHIPS: Chip[] = [
   },
   {
     id: 'secure',
-    className: 'right-[-2%] sm:right-[2%] top-[66%]',
+    className: 'right-[12%] sm:right-[2%] top-[66%]',
     depth: 1.8,
     icon: <ShieldCheck className="w-4 h-4" />,
     iconTint: 'bg-emerald/15 text-emerald-light',
@@ -155,16 +155,16 @@ export function Hero({ onOpenDownload }: HeroProps) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.6 }}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
+          className="mt-10 mx-auto max-w-sm sm:max-w-none flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3"
         >
-          <Magnetic>
+          <Magnetic className="w-full sm:w-auto">
             <motion.button
               whileTap={{ scale: 0.97 }}
               onClick={() => {
                 playHapticFeedback('medium');
                 onOpenDownload();
               }}
-              className="group relative h-12 px-7 rounded-full font-semibold text-[15px] text-neutral-950 bg-gradient-to-b from-[#FDE38A] to-credvert-gold shadow-[0_10px_40px_-10px_rgba(212,168,83,0.7)] inline-flex items-center gap-2 overflow-hidden"
+              className="group relative w-full sm:w-auto justify-center h-12 px-7 rounded-full font-semibold text-[15px] text-neutral-950 bg-gradient-to-b from-[#FDE38A] to-credvert-gold shadow-[0_10px_40px_-10px_rgba(212,168,83,0.7)] inline-flex items-center gap-2 overflow-hidden"
             >
               <span className="relative z-10">Get the app — it’s free</span>
               <ArrowRight className="relative z-10 w-4 h-4 transition-transform group-hover:translate-x-0.5" />
@@ -178,7 +178,7 @@ export function Hero({ onOpenDownload }: HeroProps) {
             whileTap={{ scale: 0.97 }}
             href="#lab"
             onClick={() => playHapticFeedback('light')}
-            className="h-12 px-7 rounded-full font-semibold text-[15px] inline-flex items-center gap-2 text-neutral-900 dark:text-white border border-black/10 dark:border-white/15 hover:bg-black/[0.03] dark:hover:bg-white/[0.06] transition-colors"
+            className="h-12 px-7 rounded-full font-semibold text-[15px] inline-flex items-center justify-center gap-2 text-neutral-900 dark:text-white border border-black/10 dark:border-white/15 hover:bg-black/[0.03] dark:hover:bg-white/[0.06] transition-colors"
           >
             Try it live
           </motion.a>
@@ -215,7 +215,7 @@ export function Hero({ onOpenDownload }: HeroProps) {
         >
           <motion.div
             style={{ y: stageY, scale: stageScale, rotateX: tiltX, rotateY: tiltY, transformStyle: 'preserve-3d' }}
-            className="relative will-change-transform"
+            className="relative will-change-transform -mx-[14%] sm:mx-0"
           >
             <Image
               src="/assets/mockups/wallet-mockup.png"

@@ -32,21 +32,33 @@ const ITEMS: MarqueeItem[] = [
 ];
 
 export default function BankMarquee() {
-  const row = [...ITEMS, ...ITEMS];
+  const half = Math.ceil(ITEMS.length / 2);
 
   return (
     <section aria-label="Supported banks and networks" className="relative py-14 sm:py-20">
       <Reveal y={10}>
-        <p className="text-center text-[13px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-8">
+        <p className="text-center text-[11px] sm:text-[13px] font-mono uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-8 px-5">
           Optimized for credit cards from India&apos;s leading financial institutions &amp; payment networks
         </p>
       </Reveal>
+      <div className="space-y-3 sm:space-y-4">
+        <MarqueeRow items={ITEMS.slice(0, half)} />
+        <MarqueeRow items={ITEMS.slice(half)} reverse />
+      </div>
+    </section>
+  );
+}
+
+function MarqueeRow({ items, reverse = false }: { items: MarqueeItem[]; reverse?: boolean }) {
+  const row = [...items, ...items, ...items, ...items];
+
+  return (
       <div className="marquee relative overflow-hidden mask-fade-x">
-        <ul className="marquee-track flex w-max items-center gap-3 sm:gap-4">
+        <ul className={`marquee-track ${reverse ? 'marquee-track-reverse' : ''} flex w-max items-center gap-3 sm:gap-4`}>
           {row.map((item, i) => (
             <li
               key={`${item.name}-${i}`}
-              aria-hidden={i >= ITEMS.length}
+              aria-hidden={i >= items.length}
               className="flex items-center gap-3 h-14 pl-2 pr-5 rounded-2xl border border-black/[0.06] dark:border-white/[0.07] bg-white/80 dark:bg-white/[0.03] backdrop-blur-md shadow-sm transition-transform hover:scale-[1.02]"
             >
               {item.kind === 'bank' ? (
@@ -79,6 +91,5 @@ export default function BankMarquee() {
           ))}
         </ul>
       </div>
-    </section>
   );
 }

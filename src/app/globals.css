@@ -207,8 +207,23 @@ body {
 .marquee-track {
   animation: marquee 42s linear infinite;
 }
+.marquee-track-reverse {
+  animation-direction: reverse;
+  animation-duration: 48s;
+}
 .marquee:hover .marquee-track {
   animation-play-state: paused;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+html.lenis {
+  scroll-behavior: auto;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
 }
 
 /* Range slider */
