@@ -7,6 +7,7 @@ import { CalendarClock, Cpu, Globe2, Lock, Plane, ShoppingBag, Smartphone, Fuel,
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { SpotlightCard } from '@/components/ui/SpotlightCard';
 import { Stagger, StaggerItem } from '@/components/ui/Reveal';
+import { Parallax } from '@/components/ui/Parallax';
 import { CountUp } from '@/components/ui/AppleText';
 import { easeOutExpo } from '@/lib/motion';
 import { getBankSymbolUrl } from '@/lib/bank-logos';
@@ -122,7 +123,11 @@ function WaiverRing() {
 
 export default function FeatureBento() {
   return (
-    <section id="features" className="relative py-24 sm:py-32 px-5" aria-label="Features">
+    <section id="features" className="relative isolate py-24 sm:py-32 px-5" aria-label="Features">
+      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <Parallax offset={140} className="absolute -left-40 top-[20%] w-[520px] h-[520px] rounded-full bg-credvert-gold/[0.10] blur-[120px]" />
+        <Parallax offset={-120} className="absolute -right-40 top-[55%] w-[480px] h-[480px] rounded-full bg-sapphire/[0.08] blur-[120px]" />
+      </div>
       <SectionHeading
         eyebrow="Features"
         title={['Everything a card expert knows.', <span key="b" className="text-neutral-400 dark:text-neutral-500">In your pocket.</span>]}
@@ -141,24 +146,28 @@ export default function FeatureBento() {
           </SpotlightCard>
         </StaggerItem>
 
-        <StaggerItem className="lg:col-span-2">
-          <SpotlightCard className={tile}>
-            <TileTitle icon={Globe2} title="Forex, honestly." body="Markup plus 18% GST is subtracted before ranking." />
-            <div className="mt-6 flex items-baseline gap-2 font-display tabular text-neutral-900 dark:text-white">
-              <span className="text-lg text-neutral-500">3.5% × 1.18 =</span>
-              <span className="text-3xl font-semibold text-rose-500 dark:text-rose-400">4.13%</span>
-            </div>
-          </SpotlightCard>
-        </StaggerItem>
+        <Parallax desktopOnly offset={36} className="lg:col-span-2">
+          <StaggerItem className="h-full">
+            <SpotlightCard className={tile}>
+              <TileTitle icon={Globe2} title="Forex, honestly." body="Markup plus 18% GST is subtracted before ranking." />
+              <div className="mt-6 flex items-baseline gap-2 font-display tabular text-neutral-900 dark:text-white">
+                <span className="text-lg text-neutral-500">3.5% × 1.18 =</span>
+                <span className="text-3xl font-semibold text-rose-500 dark:text-rose-400">4.13%</span>
+              </div>
+            </SpotlightCard>
+          </StaggerItem>
+        </Parallax>
 
-        <StaggerItem className="lg:col-span-2">
-          <SpotlightCard className={tile}>
-            <TileTitle icon={Lock} title="Only the last four." body="No full card numbers, CVVs or OTPs. Ever." />
-            <div className="mt-6 inline-flex items-center gap-3 rounded-2xl px-4 py-3 bg-gradient-to-br from-[#3B1D5E] to-[#1E1033] text-white font-mono tracking-[0.2em] text-sm">
-              •••• •••• •••• <span className="text-credvert-goldLight">5556</span>
-            </div>
-          </SpotlightCard>
-        </StaggerItem>
+        <Parallax desktopOnly offset={36} className="lg:col-span-2">
+          <StaggerItem className="h-full">
+            <SpotlightCard className={tile}>
+              <TileTitle icon={Lock} title="Only the last four." body="No full card numbers, CVVs or OTPs. Ever." />
+              <div className="mt-6 inline-flex items-center gap-3 rounded-2xl px-4 py-3 bg-gradient-to-br from-[#3B1D5E] to-[#1E1033] text-white font-mono tracking-[0.2em] text-sm">
+                •••• •••• •••• <span className="text-credvert-goldLight">5556</span>
+              </div>
+            </SpotlightCard>
+          </StaggerItem>
+        </Parallax>
 
         <StaggerItem className="lg:col-span-2">
           <SpotlightCard className={tile}>
@@ -187,7 +196,8 @@ export default function FeatureBento() {
           </SpotlightCard>
         </StaggerItem>
 
-        <StaggerItem className="sm:col-span-2 lg:col-span-2">
+        <Parallax desktopOnly offset={36} className="sm:col-span-2 lg:col-span-2">
+          <StaggerItem className="h-full">
           <SpotlightCard className={tile}>
             <TileTitle icon={Cpu} title="Spends, parsed on-device." body="Bank SMS alerts become clean spend data without leaving your phone." />
             <div className="mt-6 grid grid-cols-2 gap-3">
@@ -201,7 +211,8 @@ export default function FeatureBento() {
               </div>
             </div>
           </SpotlightCard>
-        </StaggerItem>
+          </StaggerItem>
+        </Parallax>
       </Stagger>
     </section>
   );

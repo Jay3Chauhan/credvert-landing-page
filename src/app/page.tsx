@@ -18,7 +18,11 @@ import Footer from '@/components/Footer';
 import ComparisonDock from '@/components/ComparisonDock';
 import DownloadModal from '@/components/DownloadModal';
 import Toast, { ToastMessage } from '@/components/Toast';
+import VelocityMarquee from '@/components/VelocityMarquee';
+import UseCases from '@/components/UseCases';
+import MobileCTA from '@/components/MobileCTA';
 import { CREDVERT_CARDS } from '@/lib/cards-data';
+import { scrollToId } from '@/lib/smooth-scroll';
 
 const MAX_COMPARE = 3;
 
@@ -60,12 +64,14 @@ export default function HomePage() {
       <BankMarquee />
       <Manifesto />
       <FeatureBento />
+      <VelocityMarquee />
       <FilmSection />
       <HowItWorks />
+      <UseCases />
       <Lab
         onSelectCard={(slug) => {
           if (!selectedCardIds.includes(slug)) toggleCompare(slug);
-          document.getElementById('cards')?.scrollIntoView({ behavior: 'smooth' });
+          scrollToId('cards');
         }}
       />
       <CardCatalog
@@ -86,6 +92,7 @@ export default function HomePage() {
         isModalOpen={compareOpen}
         setIsModalOpen={setCompareOpen}
       />
+      <MobileCTA onOpenDownload={openDownload} suppressed={downloadOpen || selectedCardIds.length > 0} />
       <DownloadModal isOpen={downloadOpen} onClose={() => setDownloadOpen(false)} />
     </main>
   );

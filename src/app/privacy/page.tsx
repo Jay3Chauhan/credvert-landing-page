@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy & Zero-Knowledge Architecture | Credvert',
+  title: 'Privacy Policy & Zero-Knowledge Architecture',
   description:
     'Credvert Privacy Policy: Comprehensive disclosure on on-device SMS processing, zero-knowledge hardware enclave security, DPDP Act 2023, GDPR, and CCPA compliance.',
   alternates: {

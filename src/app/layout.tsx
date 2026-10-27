@@ -2,12 +2,12 @@ import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Outfit, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { SmoothScroll } from '@/components/SmoothScroll';
 import { FAQ_ITEMS } from '@/lib/faq-data';
 
-const TITLE = 'credVert. — The right card for every swipe';
+const TITLE = 'credVert. — Best Credit Card for Every Purchase in India';
 const DESCRIPTION =
-  'credVert. tells you which credit card to tap for every purchase, tracks fee waivers and milestones, and parses bank SMS on your phone. Built for India and the DPDP Act 2023.';
-const OG_IMAGE = '/assets/mockups/wallet-mockup.png';
+  'credVert. tells you which credit card to tap for every purchase — dining, flights, fuel, UPI and forex — tracks fee waivers and milestones, and parses bank SMS privately on your phone. Free, built for India and the DPDP Act 2023.';
 
 const sansFont = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -53,7 +53,14 @@ export const metadata: Metadata = {
     'on-device SMS expense tracker',
     'DPDP Act 2023',
     'airport lounge access India',
+    'best credit card for dining India',
+    'best credit card for UPI RuPay',
+    'credit card comparison India',
+    'credit card reward calculator',
+    'which credit card to use',
   ],
+  category: 'finance',
+  formatDetection: { telephone: false, email: false, address: false },
   authors: [{ name: 'Jay Chauhan', url: 'https://credvert.tech' }],
   creator: 'Jay Chauhan',
   publisher: 'credVert. Technologies',
@@ -74,7 +81,6 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     siteName: 'credVert.',
-    images: [{ url: OG_IMAGE, width: 1536, height: 1024, alt: 'credVert. app on iPhone' }],
     locale: 'en_IN',
   },
   twitter: {
@@ -82,7 +88,6 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     creator: '@jay3chauhan',
-    images: [OG_IMAGE],
   },
   robots: {
     index: true,
@@ -111,6 +116,7 @@ export default function RootLayout({
         url: 'https://credvert.tech',
         name: 'credVert.',
         description: TITLE,
+        inLanguage: 'en-IN',
         publisher: {
           '@id': 'https://credvert.tech/#organization',
         },
@@ -126,15 +132,18 @@ export default function RootLayout({
           price: '0',
           priceCurrency: 'INR',
         },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          ratingCount: '4850',
-          bestRating: '5',
-          worstRating: '1',
-        },
-        description:
-          DESCRIPTION,
+        description: DESCRIPTION,
+        screenshot: 'https://credvert.tech/assets/mockups/wallet-mockup.png',
+        downloadUrl: 'https://github.com/Jay3Chauhan/CreditVance/releases',
+        featureList: [
+          'Best-card recommendation for every purchase category',
+          'Forex markup and GST-adjusted rankings',
+          'Fee waiver and milestone tracking',
+          'On-device bank SMS parsing',
+          'Statement and due-date reminders',
+        ],
+        inLanguage: 'en-IN',
+        publisher: { '@id': 'https://credvert.tech/#organization' },
         author: {
           '@type': 'Person',
           name: 'Jay Chauhan',
@@ -148,6 +157,7 @@ export default function RootLayout({
         name: 'credVert. Technologies',
         url: 'https://credvert.tech',
         logo: 'https://credvert.tech/assets/Icon-512.png',
+        sameAs: ['https://github.com/Jay3Chauhan/CreditVance', 'https://x.com/jay3chauhan'],
         founder: {
           '@type': 'Person',
           name: 'Jay Chauhan',
@@ -179,7 +189,7 @@ export default function RootLayout({
 
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable}`}
       suppressHydrationWarning
     >
@@ -222,6 +232,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <ThemeProvider>
+          <SmoothScroll />
           <div id="main" className="relative flex flex-col min-h-screen">{children}</div>
           <div className="grain" aria-hidden="true" />
         </ThemeProvider>

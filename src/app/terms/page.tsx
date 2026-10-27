@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms and Conditions of Service | Credvert',
+  title: 'Terms and Conditions of Service',
   description:
     'Credvert Terms and Conditions of Service: Comprehensive user terms, non-lender disclaimers, intellectual property fair use, and limitation of liability.',
   alternates: {
